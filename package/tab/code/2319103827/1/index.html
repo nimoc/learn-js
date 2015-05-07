@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab 选项卡（第一阶段） By 你的昵称</title>
+    <style>
+span {
+    padding: 1em;
+    border: 1px solid green;
+    cursor: pointer;
+}
+.on{
+    color:red;
+}
+hr{
+    margin-top: 1em;
+    height:0;
+    border:none;
+    border-bottom:1px solid #DDD;
+}
+.show {
+    display: block;
+}
+div{
+    display: none;
+    border:1px solid #ABCDEF;
+    padding:1em;
+}
+    </style>
+</head>
+<body>
+    <h1>
+        Tab 选项卡（第一阶段） By 你的昵称
+    </h1>
+
+    <span class="on">1</span>
+    <span>2</span>
+    <span>3</span>
+    <hr>
+    <div class="show">a</div>
+    <div>b</div>
+    <div>c</div>
+    <script src="../../../../../static/jquery/1.11.2/jquery.js"></script>
+    <script>
+$(function () {
+    $('span').on('click', function () {
+        var $this = $(this)
+        var index = $this.index('span')
+        $('.on').removeClass('on')
+        $this.addClass('on')
+        $('.show').removeClass('show')
+        $('div').eq(index).addClass('show')
+    })
+})
+    </script>
+
+    
+    <p>
+        <a href="https://github.com/nimojs/learn-js">learn-js</a>: 一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
+    </p>
+</body>
+</html>
