@@ -11,7 +11,7 @@
 **参与方式：**
 选择挑战某个组件开发，按阶段完成任务。将自己的代码提交到对应组件中。
 
-[Fork & Pull Requests](fork&pullrequests.md)
+[Fork & Pull Requests | 克隆与请求合并](fork&pullrequests.md)
 
 ## Tab 选项卡
 
