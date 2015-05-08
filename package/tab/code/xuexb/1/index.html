@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tab 选项卡（第一阶段） By xuexb 谢亮</title>
+
+    <!-- 样式 -->
+    <style type="text/css">
+        .demo ul,
+        .demo li{
+            padding:0;margin:0;
+        }
+        .demo ul{
+            list-style:none;
+        }
+
+        .demo{
+            background-color:#fff;
+            border:1px solid  #ccc;
+        }
+        .demo-nav{
+            line-height:30px;
+            height:30px;
+            background-color:#f0f0f0;
+            border-bottom:1px solid  #ccc;
+        }
+        .demo-nav li{
+            cursor:pointer;
+            float:left;
+            border-right:1px solid  #ccc;
+            width:100px;
+            text-align:center;
+        }
+        /*导航高亮*/
+        .demo-nav li.current{
+            background-color:#fff;
+            height:31px;
+        }
+        /*默认让内容隐藏,只显示第一个*/
+        .demo-cnt-item{
+            display:none;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Tab 选项卡（第一阶段） By xuexb 谢亮
+    </h1>
+
+
+    <h2>demo1 默认第1个显示</h2>
+    <div class="demo" id="J-demo1">
+        <div class="demo-nav">
+            <ul>
+                <li class="current">选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+            </ul>
+        </div>
+
+        <div class="demo-cnt">
+            <div class="demo-cnt-item item-1" style="display:block;">一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一<br>0001000100010001<br>000100010001</div>
+            <div class="demo-cnt-item item-2">二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二<br>00020002000200020002</div>
+            <div class="demo-cnt-item item-3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</div>
+        </div>
+    </div>
+
+    <h2>demo2 默认第2个显示</h2>
+    <div class="demo" id="J-demo2">
+        <div class="demo-nav">
+            <ul>
+                <li>选项1</li>
+                <li class="current">选项2</li>
+                <li>选项3</li>
+            </ul>
+        </div>
+
+        <div class="demo-cnt">
+            <div class="demo-cnt-item item-1">一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一<br>0001000100010001<br>000100010001</div>
+            <div class="demo-cnt-item item-2" style="display:block;">二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二<br>00020002000200020002</div>
+            <div class="demo-cnt-item item-3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</div>
+        </div>
+    </div>
+
+    
+    <p>
+        <a href="https://github.com/nimojs/learn-js">learn-js</a>: 一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
+    </p>
+
+
+
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $('#J-demo1 .demo-nav li').on('click', function(){
+            var $that = $(this);
+
+            $that.addClass('current').siblings().removeClass('current');//给当前元素添加高亮并移除其他导航上的高亮
+
+            $('#J-demo1 .demo-cnt').children().hide().eq($that.index()).show();//隐藏所有内容,并显示当前索引的内容
+        });
+
+
+
+        $('#J-demo2 .demo-nav li').on('click', function(){
+            var $that = $(this);
+
+            $that.addClass('current').siblings().removeClass('current');//给当前元素添加高亮并移除其他导航上的高亮
+
+            $('#J-demo2 .demo-cnt').children().hide().eq($that.index()).show();//隐藏所有内容,并显示当前索引的内容
+        });
+    </script>
+</body>
+</html>
