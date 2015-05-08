@@ -6,9 +6,18 @@
 
 ## 阶段2
 
-但后来发现,因为代码和需求耦合性太强了,比如产品可能要切换成默认显示第三个,用1的方法需要修改导航的类和内容显示第N个,感觉不帅,我想只操作导航的类内容就初始了,于是做了以下: [demo2](2/index.html)
+封装成一个 `tab` 函数: [demo2](2/index.html)
 
-未完待续...
+## 阶段3
+
+添加 `activeIndex`默认触发索引,`activeTriggerClass`触发操作的样式类 参数: [demo3](3/index.html)
+
+## 阶段4
+
+添加`triggerType`事件类型参数: [demo4](4/index.html)
+
+## 阶段5
+
+添加`onSwitch`触发回调参数: [demo5](5/index.html)
 
 [在线浏览](http://github.xuexb.com/tab/)
-
