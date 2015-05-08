@@ -1,11 +1,16 @@
 # learn-js
 
+
+**请确认你访问的是主版本 [nimojs/learn-js](https://github.com/nimojs/learn-js)，在主版本中你可以看到所有人的代码提交**
+
+---
+
 这是一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
 
 组件开发的挑战是循序渐渐的，每个组件开发挑战都必须掌握必要的知识才可以接受。
 
 > 点击右上角的 **[Watch](https://github.com/nimojs/learn-js/subscription)** 关注本项目，点击 Star 收藏本项目。
-> 
+
 ---
 
 **参与方式：**
