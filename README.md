@@ -22,18 +22,11 @@
 
 <a href="package/tab/"><img src="package/tab/tab.png" ></a>
 
-### 技能最低要求
-
-1. 熟悉 jQuery
 
 [接受挑战](package/tab/)
 
 ## Dialog 弹出层
 
 <a href="package/dialog/"><img src="package/dialog/dialog.png" ></a>
-
-### 技能最低要求
-
-1. 熟悉 jQuery
 
 [接受挑战](package/dialog/)
