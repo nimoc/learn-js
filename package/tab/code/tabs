@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>原生javascript面向对象学习--选项卡组件</title>
+<style type="text/css">
+*{margin: 0; padding: 0;}
+.newtab{
+	width: 300px;
+	height: 400px;
+	border: 1px solid #ccc;
+	margin: 20px auto;
+	overflow: hidden;
+}	
+.triggers{
+	width: 100px;
+	float: left;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin-left: -1px;
+	line-height: 40px;
+	height: 40px;
+	text-align: center;
+	cursor: pointer;
+}
+.active{
+	color: #f30;
+	background: #fcc;
+}
+.contents{
+	height: 258px;
+	display: none
+}
+.show{
+	display: block;
+}
+.ui-tab-active{
+    color: red;
+}
+</style>
+</head>
+<body>
+<div class="newtab">
+    <span class="triggers">1</span>
+    <span class="triggers">2</span>
+    <span class="triggers">3</span>
+
+    <div class="contents">a</div>
+    <div class="contents">b</div>
+    <div class="contents">c</div>
+</div>	
+<script type="text/javascript">
+/*
+ *	基于面向对象的简单选项卡组件
+ *	@author myadmin.github.io
+ *	@version tab 1.0 2015年5月11日 22:05:23
+ *
+ */
+(function (win, undefined){
+
+	var doc = win.document;
+
+	var tab = (function (){
+
+		var Tab = function (options){
+			return new Tab.fnStart.init(options);
+		};
+
+		Tab.fnStart = Tab.prototype = {
+			init: function (options){
+				this.obj = document.querySelectorAll(options.element)[0];
+				this.triggers = this.obj.querySelectorAll(options.triggers);
+				this.contents = this.obj.querySelectorAll(options.contents);
+				this.activeIndex = options.activeIndex || 0;
+				this.activeTriggerClass = options.activeTriggerClass || 'active';
+				this.triggerType = options.triggerType || 'click';
+				this.onSwitch = options.onSwitch || '';
+
+				this.domReady();
+			},
+			domReady: function (){
+				var _this = this;
+
+				for(var i = 0; i < _this.triggers.length; i++){
+					_this.triggers[i].className = 'triggers';
+					_this.contents[i].className = 'contents';
+				}
+				_this.triggers[_this.activeIndex].className = 'triggers ' + _this.activeTriggerClass;
+				_this.contents[_this.activeIndex].className = 'contents show';
+
+				this.trigger();
+			},
+			trigger: function (){
+				var _this = this;
+
+				for(var i = 0; i < this.triggers.length; i++){
+					(function (index){
+						switch(_this.triggerType){
+							case 'hover':
+								_this.triggers[i].onmouseover = function (){
+									_this.fnEvent(index);
+								};
+								break;
+							case 'click':
+								_this.triggers[i].onclick = function (){
+									_this.fnEvent(index);
+								};
+								break;	
+						}
+					})(i);
+				}
+			},
+			fnEvent: function (index){
+				for(var i = 0; i < this.triggers.length; i++){
+					this.triggers[i].className = 'triggers';
+					this.contents[i].className = 'contents';
+				}
+				this.triggers[index].className = 'triggers ' + this.activeTriggerClass;
+				this.contents[index].className = 'contents show';
+
+				this.onSwitch && this.onSwitch(index, this.triggers.length);
+			}
+		};
+
+		Tab.fnStart.init.prototype = Tab.prototype;
+
+		return Tab;
+
+	})();
+
+	win.tab = tab;
+
+})(window);	
+
+/*
+ *  调用方式：tab();
+ *	参数：element、triggers、contents 必选
+ *	其余参数可选
+ *
+ */
+
+tab({
+	element: '.newtab',
+    triggers: '.triggers',
+    contents: '.contents',
+    triggerType: 'click',
+    activeIndex: 1,
+    activeTriggerClass: 'ui-tab-active',
+    onSwitch: function (index, count){
+    	//事件执行时onSwitch会执行，可选
+    	/*
+        index 是当前 trigger 的索引
+        count 是 trigger 的总数
+        */
+    }
+});
+</script>	
+</body>
+</html>
