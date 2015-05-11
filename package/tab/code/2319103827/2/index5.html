@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab 选项卡（第一阶段） By 2319103827</title>
+    <style>
+.newtab span {
+    padding: 1em;
+    border: 1px solid green;
+    cursor: pointer;
+}
+.ui-tab-active{
+    background-color:red;
+}
+hr{
+    margin-top: 1em;
+    height:0;
+    border:none;
+    border-bottom:1px solid #DDD;
+}
+
+.newtab div{
+    display: none;
+    border:1px solid #ABCDEF;
+    padding:1em;
+}
+.newtab .show {
+    display: block;
+    background-color: pink;
+}
+    </style>
+</head>
+<body>
+    <h1>
+        Tab 选项卡（第一阶段） By 2319103827
+    </h1>
+    <div class="newtab">
+        <span class="triggers">1</span>
+        <span class="triggers">2</span>
+        <span class="triggers">3</span>
+    <hr>
+        <div class="contents">a</div>
+        <div class="contents">b</div>
+        <div class="contents">c</div>
+    </div>
+    <script src="../../../../../static/jquery/1.11.2/jquery.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        var tab = function(obj){
+            var index;
+            var triggerType;
+            (obj.activeIndex == null) ? index = 0 : index = obj.activeIndex;
+            (obj.triggerType === "hover") ? triggerType = 'mouseover' : triggerType = 'click';
+            $(obj.triggers).eq(index).addClass(obj.activeTriggerClass)
+            $(obj.contents).eq(index).addClass('show')
+            $(obj.triggers).on(triggerType,function(){
+                var $this = $(this)
+                console.log($(obj.contents).eq(index))
+                var index = $this.index(obj.triggers)
+                $('.ui-tab-active').removeClass(obj.activeTriggerClass)
+                $this.addClass(obj.activeTriggerClass)
+                $('.show').removeClass('show')
+                $(obj.contents).eq(index).addClass('show')
+                obj.onSwitch(index, $(obj.triggers).length)
+            })
+        }
+        tab({
+            element: '.newtab',
+            triggers: '.triggers',
+            contents: '.contents',
+            activeIndex: 0,
+            activeTriggerClass: 'ui-tab-active',
+            triggerType: 'click',
+            onSwitch: function (index, count) {
+                var html = "当前是第" + (index+1) + "显示,总共有" + count + "页面"
+                console.log(html)
+            }
+        })
+    })
+    </script>
+
+    
+    <p>
+        <a href="https://github.com/nimojs/learn-js">learn-js</a>: 一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
+    </p>
+</body>
+</html>
