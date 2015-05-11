@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tab 选项卡（第一阶段） By 2319103827</title>
+    <title>Tab 选项卡（第二阶段） By 2319103827</title>
     <style>
 .newtab span {
     padding: 1em;
     border: 1px solid green;
     cursor: pointer;
 }
-.ui-tab-active{
-    background-color:red;
+.on{
+    color:red;
 }
 hr{
     margin-top: 1em;
@@ -35,11 +35,11 @@ hr{
         Tab 选项卡（第一阶段） By 2319103827
     </h1>
     <div class="newtab">
-        <span class="triggers">1</span>
+        <span class="on triggers">1</span>
         <span class="triggers">2</span>
         <span class="triggers">3</span>
     <hr>
-        <div class="contents">a</div>
+        <div class="show contents">a</div>
         <div class="contents">b</div>
         <div class="contents">c</div>
     </div>
@@ -47,25 +47,23 @@ hr{
     <script type="text/javascript">
     $(function(){
         var tab = function(obj){
-            var index;
-            (obj.activeIndex == null) ? index = 0 : index = obj.activeIndex
-            $(obj.triggers).eq(index).addClass(obj.activeTriggerClass)
-            $(obj.contents).eq(index).addClass('show')
             $(obj.triggers).click(function(){
                 var $this = $(this)
                 var index = $this.index(obj.triggers)
-                $('.ui-tab-active').removeClass(obj.activeTriggerClass)
-                $this.addClass(obj.activeTriggerClass)
+                $('.on').removeClass('on')
+                $this.addClass('on')
                 $('.show').removeClass('show')
                 $(obj.contents).eq(index).addClass('show')
+
+
+                var index = $this.index(obj.triggers)
+                $(obj.contents).eq(index).text(index+1)
             })
         }
         tab({
             element: '.newtab',
             triggers: '.triggers',
-            contents: '.contents',
-            // activeIndex: 0
-            activeTriggerClass: 'ui-tab-active'
+            contents: '.contents'
         })
     })
     </script>
