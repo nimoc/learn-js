@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+<head lang="en">
     <meta charset="UTF-8">
-    <title>Tab 选项卡（第一阶段） By zmen</title>
+    <title>Tab 选项卡（第二阶段） By zmen</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        #tabs {
-            position: relative;
-            top: 20px;
-            left: 20px;
-            border: 1px solid grey;
-            width: 600px;
-            height: 100px;
-        }
-        #triggers {
-            overflow: hidden;
-            background: grey;
-        }
-        #triggers li {
-            float: left;
-            cursor: pointer;
-            background-color: grey;
-            padding: 2px;
-            color: white;
-        }
-        #triggers .current {
-            background-color: white;
-            color: black;
-        }
-        #contents li {
-            display: none;
-        }
-        p {
-           position: relative;
-           top: 20px;
-           left: 20px;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #tabs {
+        position: relative;
+        top: 20px;
+        left: 20px;
+        border: 1px solid grey;
+        width: 600px;
+        height: 100px;
+    }
+    #triggers {
+        overflow: hidden;
+        background: grey;
+    }
+    #triggers li {
+        float: left;
+        cursor: pointer;
+        background-color: grey;
+        padding: 2px;
+        color: white;
+    }
+    #triggers .current {
+        background-color: white;
+        color: black;
+    }
+    #contents li {
+        display: none;
+    }
+    p {
+        position: relative;
+        top: 20px;
+        left: 20px;
+    }
     </style>
 </head>
 <body>
@@ -58,10 +58,12 @@
     <p>
         <a href="https://github.com/nimojs/learn-js">learn-js</a>: 一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
     </p>
-    <script>
-        window.onload = function() {
-            var triggers = document.getElementById("triggers").children;
-            var contents = document.getElementById("contents").children;
+
+    <script type="text/javascript">
+    
+        var tab = function(option) {
+            var triggers = document.querySelectorAll(option.triggers)[0].children;
+            var contents = document.querySelectorAll(option.contents)[0].children;
             triggers[0].className = "current";
             contents[0].style.display = "block";
             var len = triggers.length;
@@ -77,6 +79,15 @@
                 }
             }
         }
+        
+        
+        tab(
+            {
+                tabs: "#tabs",
+                triggers: "#triggers",
+                contents: "#contents"
+            }
+        )
     </script>
 </body>
 </html>
