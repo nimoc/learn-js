@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Tab 选项卡（第二阶段） By zmen</title>
+    <title>Tab 选项卡（第五阶段） By zmen</title>
     <style>
     * {
         margin: 0;
@@ -61,20 +61,28 @@
 
     <script type="text/javascript">
     
-        var tab = function(option) {
+        var triggerTypes = function(elem, type, subfunction) {
+            if(type == "click")
+                elem.onclick = subfunction;
+            else if (type == "hover")
+                elem.onmouseover = subfunction;
+        }
         
+        var tab = function(option) {
             var triggers = document.querySelectorAll(option.triggers)[0].children;
             var contents = document.querySelectorAll(option.contents)[0].children;
             triggers[option.activeIndex].className = option.activeTriggerClass;
             contents[option.activeIndex].style.display = "block";
             var len = triggers.length;
-            
+   
             for (var i=0; i<len; i++) {
                 triggers[i].index = i;
                 
-                if(option.triggerType == "click") {
-                    triggers[i].onclick = function() {
-                        //检测Switch事件
+                triggerTypes(
+                    triggers[i], 
+                    option.triggerType,
+                    function() {
+                        //onSwitch 检测
                         for( var j=0; j<len; j++) {
                             if(triggers[j].className == option.activeTriggerClass)
                                 break;
@@ -82,49 +90,27 @@
                         if(this.index != j) {
                             option.onSwitch(this.index, len);
                         }
-                        //绑定onclick事件    
+                        //onSwitch 检测 end                       
                         for(var n=0; n<len; n++) {
                             triggers[n].className = "";
                             contents[n].style.display = "none";
                         }
-                    
                         triggers[this.index].className = option.activeTriggerClass;
                         contents[this.index].style.display = "block";
-                    }
-                }
-                else if(option.triggerType == "hover") {
-                    triggers[i].onmouseover = function() {
-                        //检测Switch事件
-                        for( var j=0; j<len; j++) {
-                            if(triggers[j].className == option.activeTriggerClass)
-                                break;
-                        }
-                        if(this.index != j) {
-                            option.onSwitch(this.index, len);
-                        }
-                        //绑定onmouseover事件    
-                        for(var n=0; n<len; n++) {
-                            triggers[n].className = "";
-                            contents[n].style.display = "none";
-                        }
-                    triggers[this.index].className = option.activeTriggerClass;
-                    contents[this.index].style.display = "block";  
-                    }
-                }
-                
+                    }                    
+                );
+               
             }
-        }
-        
-        
-        tab
-        (
+        }                
+
+        tab(
             {
                 tabs: "#tabs",
                 triggers: "#triggers",
                 contents: "#contents",
                 activeIndex: 1,
                 activeTriggerClass: "ui-tab-active",
-                triggerType: "click",
+                triggerType: "hover",
                 onSwitch: function (index, count) {
                     alert("index is "+index+"\n"+"count is"+count);
                     /*
