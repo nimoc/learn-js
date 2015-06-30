@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.tab .tri {
+	display: inline-block;
+	padding: 10px;
+}
+
+.tab .ui-tab-active {
+	position: relative;
+	top: 1px;
+	z-index: 1;
+	border: 1px solid #D5D5D5;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom: none;
+	background: white;
+}
+
+.tab .cont {
+	display: none;
+}
+
+.tab .ui-tab-current {
+	display: block !important;
+	border-top: 1px solid #D5D5D5;
+}
