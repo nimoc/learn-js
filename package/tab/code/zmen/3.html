@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Tab 选项卡（第三阶段） By zmen</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #tabs {
+        position: relative;
+        top: 20px;
+        left: 20px;
+        border: 1px solid grey;
+        width: 600px;
+        height: 100px;
+    }
+    #triggers {
+        overflow: hidden;
+        background: grey;
+    }
+    #triggers li {
+        float: left;
+        cursor: pointer;
+        background-color: grey;
+        padding: 2px;
+        color: white;
+    }
+    #triggers .ui-tab-active {
+        background-color: white;
+        color: black;
+    }
+    #contents li {
+        display: none;
+    }
+    p {
+        position: relative;
+        top: 20px;
+        left: 20px;
+    }
+    </style>
+</head>
+<body>
+    <div id="tabs">
+        <ul id="triggers">
+            <li>Tab1</li>
+            <li>Tab2</li>
+            <li>Tab3</li>
+        </ul>
+        <ul id="contents">
+            <li>The first page.</li>
+            <li>And this is the second one.</li>
+            <li>The final one.</li>
+        </ul>
+    </div>
+    <p>
+        <a href="https://github.com/nimojs/learn-js">learn-js</a>: 一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
+    </p>
+
+    <script type="text/javascript">
+    
+        var tab = function(option) {
+            var triggers = document.querySelectorAll(option.triggers)[0].children;
+            var contents = document.querySelectorAll(option.contents)[0].children;
+            triggers[option.activeIndex].className = option.activeTriggerClass;
+            contents[option.activeIndex].style.display = "block";
+            var len = triggers.length;
+            for (var i=0; i<len; i++) {
+                triggers[i].index = i;
+                triggers[i].onclick = function() {
+                    for(var n=0; n<len; n++) {
+                        triggers[n].className = "";
+                        contents[n].style.display = "none";
+                    }
+                    triggers[this.index].className = option.activeTriggerClass;
+                    contents[this.index].style.display = "block";
+                }
+            }
+        }
+        
+        
+        tab(
+            {
+                tabs: "#tabs",
+                triggers: "#triggers",
+                contents: "#contents",
+                activeIndex: 1,
+                activeTriggerClass: "ui-tab-active"
+            }
+        )
+    </script>
+</body>
+</html>

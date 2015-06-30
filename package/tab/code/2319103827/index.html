@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tab 选项卡（第一阶段） By 你的昵称</title>
+    <title>Tab 选项卡（第一阶段） By 2319103827</title>
     <style>
 span {
     padding: 1em;
@@ -20,6 +20,7 @@ hr{
 }
 .show {
     display: block;
+    background-color: pink;
 }
 div{
     display: none;
@@ -30,14 +31,14 @@ div{
 </head>
 <body>
     <h1>
-        Tab 选项卡（第一阶段） By 你的昵称
+        Tab 选项卡（第一阶段） By 2319103827
     </h1>
 
     <span class="on">1</span>
     <span>2</span>
     <span>3</span>
     <hr>
-    <div class="show">a</div>
+    <div class="show"></div>
     <div>b</div>
     <div>c</div>
     <script src="../../../../../static/jquery/1.11.2/jquery.js"></script>
@@ -50,6 +51,10 @@ $(function () {
         $this.addClass('on')
         $('.show').removeClass('show')
         $('div').eq(index).addClass('show')
+
+
+        var index = $this.index('span')
+        $('div').eq(index).text(index+1)
     })
 })
     </script>
