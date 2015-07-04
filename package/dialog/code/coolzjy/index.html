@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="dialog.css" />
+	<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+	<script type="text/javascript" src="dialog.js"></script>
+</head>
+<body>
+	<button id="btn">Open Dialog</button>
+	<button id="btn2">Open Another Dialog</button>
+	<section>
+	代码：
+	<blockquote>
+		<pre>
+var dialog1 = dialog({trigger:"#btn", zIndex:10, title:"D1",
+		content:"这是第一个对话框。这个对话框会覆盖第二个对话框，因为这个对话框设置了 zIndex 属性",
+		effectShow:function(e){$(e).show("fast")},
+		effectHide:function(e){$(e).hide("fast")},
+		onClose:function(e){console.log(e.innerText)}});
+var dialog2 = dialog({trigger:"#btn2", title:"D2", content:"这是第二个对话框，这个对话框没有弹出关闭效果！这个对话框会被第一个对话框覆盖。",
+		onClose:function(e){console.log("dialog 2 is closed")}});
+		</pre>
+	</blockquote>
+	</section>
+</body>
+<script type="text/javascript">
+	var dialog1 = dialog({trigger:"#btn", zIndex:10, title:"D1",
+			content:"这是第一个对话框。这个对话框会覆盖第二个对话框，因为这个对话框设置了 zIndex 属性",
+			effectShow:function(e){$(e).show("fast")},
+			effectHide:function(e){$(e).hide("fast")},
+			onClose:function(e){console.log(e.innerText)}});
+	var dialog2 = dialog({trigger:"#btn2", title:"D2", content:"这是第二个对话框，这个对话框没有弹出关闭效果！这个对话框会被第一个对话框覆盖。",
+			onClose:function(e){console.log("dialog 2 is closed")}});
+</script>
+</html>
