@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>step01</title>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="js/tab_plugin.js"></script>
+</head>
+<body>
+
+<div class="tab-wrap">
+    <ul class="tab-nav" role="tablist">
+        <li><a class="tab-trigger" href="#home">Home</a></li>
+        <li><a class="tab-trigger" href="#profile">Profile</a></li>
+        <li><a class="tab-trigger" href="#demo">Demo</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane" id="home">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid cupiditate, enim ex excepturi facilis fugiat ipsam molestiae odit perspiciatis, placeat quae quam quia reprehenderit repudiandae temporibus totam, vero voluptates.
+        </div>
+        <div class="tab-pane" id="profile">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut cumque eos explicabo illo laborum quia rerum suscipit ullam. Deleniti deserunt fugiat, iure officia optio quod similique sunt vel! Sunt!
+        </div>
+        <div class="tab-pane" id="demo">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto fugiat ipsam itaque quas sunt vero? Blanditiis ducimus illum nesciunt sapiente. Aut eos eum facilis impedit, necessitatibus obcaecati ratione totam. Consectetur.
+        </div>
+    </div>
+</div>
+
+<script>
+    tab({
+        element: '.tab-wrap',
+        triggers: '.tab-trigger',
+        contents: '.tab-pane',
+        triggerType: 'hover'
+    })
+</script>
+
+</body>
+</html>
