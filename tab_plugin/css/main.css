@@ -46,6 +46,8 @@
     margin-right: 2px;
     text-decoration: none;
     font-weight: bold;
+    cursor: pointer;
+    color: #bbb;
 }
 
 .tab-nav >li.active a {

@@ -11,31 +11,26 @@
 
 <div class="tab-wrap">
     <ul class="tab-nav" role="tablist">
-        <li><a class="tab-trigger" href="#home">Home</a></li>
-        <li><a class="tab-trigger" href="#profile">Profile</a></li>
-        <li><a class="tab-trigger" href="#demo">Demo</a></li>
+        <li class="active"><a data-tab="home">Home</a></li>
+        <li><a data-tab="profile">Profile</a></li>
+        <li><a data-tab="demo">Demo</a></li>
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane" id="home">
+        <div class="tab-pane" data-tab="home">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid cupiditate, enim ex excepturi facilis fugiat ipsam molestiae odit perspiciatis, placeat quae quam quia reprehenderit repudiandae temporibus totam, vero voluptates.
         </div>
-        <div class="tab-pane" id="profile">
+        <div class="tab-pane" data-tab="profile">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut cumque eos explicabo illo laborum quia rerum suscipit ullam. Deleniti deserunt fugiat, iure officia optio quod similique sunt vel! Sunt!
         </div>
-        <div class="tab-pane" id="demo">
+        <div class="tab-pane" data-tab="demo">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto fugiat ipsam itaque quas sunt vero? Blanditiis ducimus illum nesciunt sapiente. Aut eos eum facilis impedit, necessitatibus obcaecati ratione totam. Consectetur.
         </div>
     </div>
 </div>
 
 <script>
-    tab({
-        element: '.tab-wrap',
-        triggers: '.tab-trigger',
-        contents: '.tab-pane',
-        triggerType: 'hover'
-    })
+    $('.tab-nav').tabs('.tab-content');
 </script>
 
 </body>
