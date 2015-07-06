@@ -1,24 +1,5 @@
 # learn-js
 
-这是一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
+原项目在这里<https://github.com/nimojs/learn-js>
 
-组件开发的挑战是循序渐渐的，每个组件开发挑战都必须掌握必要的知识才可以接受。
-
-> 点击右上角的 **[Watch](https://github.com/nimojs/learn-js/subscription)** 关注本项目，点击 Star 收藏本项目。
-> 
----
-
-**参与方式：**
-选择挑战某个组件开发，按阶段完成任务。将自己的代码提交到对应组件中。
-
-[Fork & Pull Requests](fork&pullrequests.md)
-
-## Tab 选项卡
-
-<a href="package/tab/"><img src="package/tab/tab.png" ></a>
-
-### 技能最低要求
-
-1. 熟悉 jQuery
-
-[接受挑战](package/tab/)
+被窝改得面目全非了……所有的插件尽量用基于事件的编程……测试用例比较老旧……估计无法起效了

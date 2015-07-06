@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: 'tab_plugin),
 
 
     // frameworks to use
@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './vendor/jquery/dist/jquery.js',
+      'tab_plugin/vendor/jquery/dist/jquery.js',
       './vendor/jasmine-jquery/lib/jasmine-jquery.js',
       './js/*.js',
       './spec/*.js',
