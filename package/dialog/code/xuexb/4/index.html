@@ -93,6 +93,9 @@
 
                 // 执行关闭回调
                 config.onClose();
+
+                // 注销事件
+                $(document).off('keydown.dialog-'+ guid);
             });
 
             // 绑定esc事件
@@ -100,7 +103,6 @@
             $(document).on('keydown.dialog-'+ guid, function(event){
                 if(event.keyCode === 27){
                     $div.find('.ui-dl-close').triggerHandler('click');
-                    $(document).off('keydown.dialog-'+ guid);
                 }
             });
         }
