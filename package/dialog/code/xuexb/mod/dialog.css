@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/**
+ * 弹出层
+ * @author xiaowu
+ * @email fe.xiaowu@gmail.com
+ */
+.ui-dl-inner { zoom: 1; position: relative; #zoom: 1; box-shadow: 0 0 8px rgba(0, 0, 0, .1); border: solid 1px #dcdcdc; background-color: #fff; }
+
+/*标题*/
+.ui-dl-inner h3 { margin: 0; padding: 0; }
+.ui-dl-hd { border-bottom: 2px #eee solid; padding-left: 20px; padding-right: 42px; position: relative; }
+.ui-dl-hd h3 { padding: 13px 0; font-size: 14px; font-weight: bold; color: #333; height: 18px; line-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/*没有标题时*/
+.ui-dl-no-title .ui-dl-hd h3 { display: none; }
+.ui-dl-no-title .ui-dl-hd { border-bottom: none; }
+
+/*关闭按钮*/
+.ui-dl-close { position: absolute; right: 0; top: 0; width: 16px; height: 16px; margin: 5px; font-size: 0; padding: 8px; cursor: pointer; }
+.ui-dl-close i { background: url('./close.png') 0 0 no-repeat; display: block; width: 16px; height: 16px; vertical-align: top; }
+.ui-dl-close:hover i { background-position: -17px 0; }
+
+/*retina*/
+@media only screen and (-webkit-min-device-pixel-ratio:1.25), only screen and (min-resolution:120dpi), only screen and (min-resolution:1.25dppx) {
+    .ui-dl-close i { background-image: url('./close@2x.png'); -webkit-background-size: 32px 14px; background-size: 32px 14px; }
+}
+
+/*内容*/
+.ui-dl-cnt { color: #333; font-size: 12px; line-height: 1.6; padding: 20px;  }
