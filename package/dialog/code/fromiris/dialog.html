@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>dialog</title>
+	<link rel="stylesheet" type="text/css" href="css/dialog.css">
+	<script src="http://cdn1.showjoy.com/assets/sea-modules/core/jquery/1.7.2/jquery.js" ></script>
+	<script type="text/javascript" src="dialog.js"></script>
+</head>
+<body>
+	<div class="dialog-btn">出现</div>
+	<script type="text/javascript" src="dialog.js"></script>
+	<script type="text/javascript">
+		dialog({
+			title: '南洋',
+			content: '我来自哈哈 现在时哈哈 我的哈哈 哈哈哈',
+			trigger: '.dialog-btn',
+			effectShow: function (ev) {
+				ev.fadeIn(1500);
+			},
+			effectHide: function (ev) {
+				ev.fadeOut(1500);
+			},
+			onclose: function (ev) {
+				$('.dialog-btn').css('right', '500px');
+			}
+		});
+	</script>
+</body>
+</html>
