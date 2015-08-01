@@ -1,0 +1,47 @@
+.dialog-container {
+  display: none;
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  margin-left: -205px;
+  top: 50%;
+  margin-top: -105px;
+  border: 5px solid #656565;
+}
+.dialog-container .dialog-header {
+  height: 50px;
+  border-bottom: 1px solid #dcdcdc;
+  background-color: #fafafa;
+  position: relative;
+}
+.dialog-container .dialog-header .header-title {
+  height: 50px;
+  padding: 0 15px;
+  line-height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.dialog-container .dialog-header .header-close {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -12px;
+  width: 24px;
+  height: 24px;
+  background: url(../close.png) no-repeat center;
+}
+.dialog-container .dialog-content {
+  padding: 10px 15px;
+}
+.dialog-btn {
+  -webkit-transition: all 1500ms ease-out 0s;
+  transition: all 1500ms ease-out 0s;
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: red;
+}
