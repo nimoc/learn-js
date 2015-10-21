@@ -17,6 +17,7 @@
 			line-height:35px;
 			text-align: center;
 			border-bottom:1px solid #D3D7DC;
+			cursor: pointer;
 		}
 		#triggers .active{
 			border-radius: 3px;
@@ -28,7 +29,13 @@
 		#contents{
 			padding:5px;
 		}
-
+		#contents div{
+			padding:5px; 
+			display:none;
+		}
+		#contents div:first-child{
+			display:block;
+		}
 	</style>
 </head>
 <body>
@@ -45,7 +52,20 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var NewTab = document.
+		var Newtab = document.getElementById('newtab');
+		var Triggers = document.getElementById('triggers').getElementsByTagName('div');
+		var Contents = document.getElementById('contents').getElementsByTagName('div');
+		for(var i = 0 ; i < Contents.length ; i++){
+			Triggers[i].index = i;
+			Triggers[i].onclick = function(){
+				for(var j = 0 ; j < Contents.length ; j++){
+					Triggers[j].className = "";
+					Contents[j].style.display = 'none';
+				}
+				this.className = 'active';
+				Contents[this.index].style.display = 'block';
+			}
+		}
 	</script>
 </body>
 </html>
