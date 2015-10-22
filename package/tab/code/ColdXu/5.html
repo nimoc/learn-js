@@ -67,13 +67,10 @@
 				if(triggerType == 'click'){
 					triggers[i].onclick = function(){
 						triggersEvent(this);
-
-
 					}
 				}else{
 					triggers[i].onmouseover = function(){
 						triggersEvent(this);
-
 					}
 				}
 			}
@@ -93,12 +90,14 @@
 
 		}
 		tab({
-		    element: '.newtab',
-		    triggers: '.triggers',
-		    contents: '.contents',
-		    onSwitch: function (index, count) {
-		    	alert('这是选项卡'+ index +'\n共有个选项卡'+ count +'');
-		    }
+			element: '.newtab',
+			triggers: '.triggers',
+			contents: '.contents',
+			triggerType: 'click',
+			activeTriggerClass: 'ui-tab-active',
+			onSwitch: function (index, count) {
+				alert('这是选项卡'+ index +'\n共有个选项卡'+ count +'');
+			}
 		})
 	</script>
 </body>
