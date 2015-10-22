@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab选项卡第五阶段</title>
+	<style type="text/css">
+		.newtab{
+			width:220px;
+		}
+		.newtab .triggers{
+			display:block;
+			float: left;
+			width:70px;
+			height:35px;
+			line-height:35px;
+			text-align: center;
+			border-bottom:1px solid #D3D7DC;
+			cursor: pointer;
+		}
+		.newtab .ui-tab-active{
+			border-radius: 3px;
+			border-top:1px solid #D3D7DC;
+			border-left:1px solid #D3D7DC;
+			border-right:1px solid #D3D7DC;
+			border-bottom:none;
+		}
+		.newtab .contents{
+			float: left;
+			width:220px;
+			display:block;
+			padding:5px; 
+		}
+	</style>
+</head>
+<body>
+	<div class="newtab">
+		<span class="triggers active">tab1</span>
+		<span class="triggers">tab2</span>
+		<span class="triggers">tab3</span>
+		<span class="contents">我的tab1的内容</span>
+		<span class="contents">我的tab2的内容</span>
+		<span class="contents">我的tab3的内容</span>
+	</div>
+	<script type="text/javascript">
+		var tab = function (opstion){
+			var newtab             = document.querySelector(opstion.element);
+			var triggers           = document.querySelectorAll(opstion.triggers);
+			var contents           = document.querySelectorAll(opstion.contents);
+			var activeIndex        = opstion.activeIndex ? opstion.activeIndex : 0;
+			var activeTriggerClass = opstion.activeTriggerClass ? opstion.activeTriggerClass : 'ui-tab-active';
+			var triggersClass      = opstion.triggers.replace('.','') + ' ' + activeTriggerClass;
+			var triggerType        = opstion.triggerType ? opstion.triggerType : 'click';
+			var onSwitch           = opstion.onSwitch;
+
+
+			// tab初始
+			for(var i = 0 ; i < triggers.length ; i++){
+				contents[i].style.display = 'none';
+			}
+			contents[activeIndex].style.display = 'block';
+			triggers[activeIndex].className = triggersClass;
+
+
+			// 事件添加
+			for(var i = 0 ; i < triggers.length ; i++){
+				triggers[i].index = i;
+				if(triggerType == 'click'){
+					triggers[i].onclick = function(){
+						triggersEvent(this);
+					}
+				}else{
+					triggers[i].onmouseover = function(){
+						triggersEvent(this);
+					}
+				}
+			}
+
+
+			// 事件功能
+			function triggersEvent(_this){
+				for( var j = 0 ; j < triggers.length ; j++ ){
+					triggers[j].className = '';
+					triggers[j].className = opstion.triggers.replace('.','');
+					contents[j].style.display = 'none';
+				}
+				_this.className = triggersClass;
+				contents[_this.index].style.display = 'block';
+				if(onSwitch) onSwitch(_this.index,triggers.length);
+			}
+
+		}
+		tab({
+			element: '.newtab',
+			triggers: '.triggers',
+			contents: '.contents',
+			triggerType: 'click',
+			activeTriggerClass: 'ui-tab-active',
+			onSwitch: function (index, count) {
+				alert('这是选项卡'+ index +'\n共有个选项卡'+ count +'');
+			}
+		})
+	</script>
+</body>
+</html>

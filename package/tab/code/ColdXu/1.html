@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab选项卡第一阶段</title>
+	<style type="text/css">
+		#newtab{
+			width:500px;
+		}
+		#triggers{
+			overflow: hidden;
+		}
+		#triggers div{
+			float: left;
+			width:70px;
+			height:35px;
+			line-height:35px;
+			text-align: center;
+			border-bottom:1px solid #D3D7DC;
+			cursor: pointer;
+		}
+		#triggers .active{
+			border-radius: 3px;
+			border-top:1px solid #D3D7DC;
+			border-left:1px solid #D3D7DC;
+			border-right:1px solid #D3D7DC;
+			border-bottom:none;
+		}
+		#contents{
+			padding:5px;
+		}
+		#contents div{
+			padding:5px; 
+			display:none;
+		}
+		#contents div:first-child{
+			display:block;
+		}
+	</style>
+</head>
+<body>
+	<div id="newtab">
+		<div id="triggers">
+			<div class="active">tab1</div>
+			<div>tab2</div>
+			<div>tab3</div>
+		</div>
+		<div id="contents">
+			<div>我的tab1的内容</div>
+			<div>我的tab2的内容</div>
+			<div>我的tab3的内容</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var Newtab = document.getElementById('newtab');
+		var Triggers = document.getElementById('triggers').getElementsByTagName('div');
+		var Contents = document.getElementById('contents').getElementsByTagName('div');
+		for(var i = 0 ; i < Contents.length ; i++){
+			Triggers[i].index = i;
+			Triggers[i].onclick = function(){
+				for(var j = 0 ; j < Contents.length ; j++){
+					Triggers[j].className = "";
+					Contents[j].style.display = 'none';
+				}
+				this.className = 'active';
+				Contents[this.index].style.display = 'block';
+			}
+		}
+	</script>
+</body>
+</html>
