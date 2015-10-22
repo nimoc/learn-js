@@ -49,6 +49,8 @@
 			var activeIndex        = opstion.activeIndex ? opstion.activeIndex : 0;
 			var activeTriggerClass = opstion.activeTriggerClass ? opstion.activeTriggerClass : 'ui-tab-active';
 			var triggersClass = opstion.triggers.replace('.','') + ' ' + activeTriggerClass;
+			var triggerType = opstion.triggerType ? opstion.triggerType : 'click';
+
 
 			// tab初始
 			for(var i = 0 ; i < triggers.length ; i++){
@@ -57,25 +59,39 @@
 			contents[activeIndex].style.display = 'block';
 			triggers[activeIndex].className = triggersClass;
 
+
+			// 事件添加
 			for(var i = 0 ; i < triggers.length ; i++){
 				triggers[i].index = i;
-				triggers[i].onclick = function(){
-
-					for( var j = 0 ; j < triggers.length ; j++ ){
-						triggers[j].className = '';
-						triggers[j].className = opstion.triggers.replace('.','');
-						contents[j].style.display = 'none';
+				if(triggerType == 'click'){
+					triggers[i].onclick = function(){
+						triggersEvent(this);
 					}
-					this.className = triggersClass;
-					contents[this.index].style.display = 'block';
+				}else{
+					triggers[i].onmouseover = function(){
+						triggersEvent(this);
+					}
 				}
+			}
+
+
+			// 事件功能
+			function triggersEvent(_this){
+				for( var j = 0 ; j < triggers.length ; j++ ){
+					triggers[j].className = '';
+					triggers[j].className = opstion.triggers.replace('.','');
+					contents[j].style.display = 'none';
+				}
+				_this.className = triggersClass;
+				contents[_this.index].style.display = 'block';
 			}
 		}
 
 		tab({
-			element:'.newtab',
-			triggers:'.triggers',
-			contents:'.contents',
+		    element: '.newtab',
+		    triggerType: 'hover',
+		    triggers: '.triggers',
+		    contents: '.contents'
 		})
 
 	</script>
