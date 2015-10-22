@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dialog弹出窗第一阶段</title>
+	<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+	<style>
+		.dialog{
+			position:fixed;
+			width:600px;
+			height:200px;
+			left:50%;
+			top:50%;
+			margin-top:-100px;
+			margin-left:-300px;
+			border: 2px solid #CBCBCB;
+			background-color:#fff;
+		}
+		.dialog .dialog-tit{
+			padding:10px;
+			line-height:25px;
+			height:25px;
+			background-color:#F8F8F8;
+			position:relative;
+		}
+		.dialog .dialog-tit .dialog-tit-close{
+			position: absolute;
+			height:10px;
+			width:10px;
+			top:8px;
+			right:5px;
+			cursor: pointer;
+		}
+		.dialog .dialog-container{
+			padding:10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="dialog">
+		<div class="dialog-tit">
+			<div class="dialog-tit-font">dialog标题</div>
+			<div class="dialog-tit-close">X</div>
+		</div>
+		<div class="dialog-container">反倒是阿凡达是爱疯多少</div>
+	</div>
+	<button type="button" id="btn">click me!</button>
+	<script>
+		function dialog (opstion) {
+			this.trigger   = $(opstion.trigger);
+			this.content   = opstion.content;
+			this.effectShow = opstion.effectShow;
+			this.effectHide = opstion.effectHide;
+			this.Reset();
+			this.Event();
+		}
+
+		// 初始
+		dialog.prototype.Reset = function () {
+			$('.dialog').hide();
+		}
+
+		// 事件配置
+		dialog.prototype.Event = function () {
+			var _this = this;
+			this.trigger.on('click', function () {
+				_this.fc()
+				if($('.dialog').css('display') == 'none'){
+					if(this.effectShow) {
+						this.effectShow($('.dialog'));
+					}else{
+						$('.dialog').show();
+					}
+				}
+			})
+
+			$('.dialog-tit-close').on('click', function () {
+				if($('.dialog').css('display') == 'block'){
+					if(this.effectHide){
+						this.effectHide($('.dialog'));
+					}else{
+						$('.dialog').hide()
+					}
+				}
+			})
+		}
+
+		// 功能配置
+		dialog.prototype.fc = function (){
+			
+			$('.dialog .dialog-container').html(this.content);
+		}
+
+		var demo = new dialog({
+			trigger : '#btn',
+			content : '哈哈',
+			effectShow : function (ele) {
+				ele.fadeIn(500);
+			},
+			effectHide : function (ele) {
+				ele.fadeOut(500);
+			}
+		});
+	</script>
+</body>
+</html>
