@@ -34,34 +34,39 @@
 </head>
 <body>
 	<div class="newtab">
-			<span class="triggers active">tab1</span>
+			<span id='n' class="triggers active">tab1</span>
 			<span class="triggers">tab2</span>
 			<span class="triggers">tab3</span>
-
 			<span class="contents">我的tab1的内容</span>
-			<span class="contents">我的tab1的内容</span>
-			<span class="contents">我的tab1的内容</span>
+			<span class="contents">我的tab2的内容</span>
+			<span class="contents">我的tab3的内容</span>
 	</div>
 	<script type="text/javascript">
-		var tab = function (opstion) {
+		var tab = function (opstion){
 			var newtab = document.querySelector(opstion.element);
 			var triggers = document.querySelectorAll(opstion.triggers);
 			var contents = document.querySelectorAll(opstion.contents);
 
+			// tab初始
+			for(var i = 0 ; i < triggers.length ; i++){
+				contents[i].style.display = 'none';
+			}
+			contents[0].style.display = 'block'
+			
 			for(var i = 0 ; i < triggers.length ; i++){
 				triggers[i].index = i;
 				triggers[i].onclick = function(){
-					for( var j = 0 ; triggers.length ; j++ ){
-						triggers[j].removeClass = 'active';
+					var tri = opstion.triggers.replace('.','');
+					var active = 'active ';
+					active += tri;
+					for( var j = 0 ; j < triggers.length ; j++ ){
+						triggers[j].className = '';
+						triggers[j].className = tri;
 						contents[j].style.display = 'none';
 					}
-					this.className = 'active';
+					this.className = active;
 					contents[this.index].style.display = 'block';
 				}
-			}
-
-			function removeClass (ele,class){
-				
 			}
 		}
 
@@ -71,19 +76,6 @@
 			contents:'.contents'
 		})
 
-
-/*
-		for(var i = 0 ; i < Contents.length ; i++){
-			Triggers[i].index = i;
-			Triggers[i].onclick = function(){
-				for(var j = 0 ; j < Contents.length ; j++){
-					Triggers[j].className = "";
-					Contents[j].style.display = 'none';
-				}
-				this.className = 'active';
-				Contents[this.index].style.display = 'block';
-			}
-		}*/
 	</script>
 </body>
 </html>
