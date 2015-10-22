@@ -42,7 +42,6 @@
 		<span class="contents">我的tab3的内容</span>
 	</div>
 	<script type="text/javascript">
-
 	function tab (opstion) {
 		this.newtab             = document.querySelector(opstion.element);
 		this.triggers           = document.querySelectorAll(opstion.triggers);
@@ -61,6 +60,7 @@
 		this.tabEvent(this);
 	}
 
+
 	// tab初始
 	tab.prototype.retab = function () {
 		for(var i = 0 ; i < this.triggers.length ; i++){
@@ -69,6 +69,7 @@
 		this.contents[this.activeIndex].style.display = 'block';
 		this.triggers[this.activeIndex].className = this.triggersClass;
 	}
+
 
 	// tab功能
 	tab.prototype.tabfc = function (_this) {
@@ -81,6 +82,7 @@
 		this.contents[_this.index].style.display = 'block';
 		if(this.onSwitch) this.onSwitch(_this.index,this.triggers.length);
 	}
+
 
 	// tab事件
 	tab.prototype.tabEvent = function (_this) {
@@ -110,9 +112,8 @@
         /*
         index 是当前 trigger 的索引
         count 是 trigger 的总数
-
         */
-        alert('这是选项卡'+ index +'\n共有个选项卡'+ count +'');
+        // alert('这是选项卡'+ index +'\n共有个选项卡'+ count +'');
     	}
 	})
 
