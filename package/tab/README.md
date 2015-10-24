@@ -13,9 +13,9 @@
 
 ```js
 tab({
-	element: '.newtab',
+    element: '.newtab',
     triggers: '.triggers',
-	contents '.contents'
+    contents: '.contents'
 })
 ```
 
