@@ -13,12 +13,14 @@ function tab(options) {
   var $triggers = $(options.triggers);
   var $contents = $(options.contents);
   var activeIndex = options.activeIndex || 0;
+  var activeTriggerClass = options.activeTriggerClass || 'ui-tab-active';
+
   $contents.eq(activeIndex).addClass('active');
-  $triggers.eq(activeIndex).addClass('active');
+  $triggers.eq(activeIndex).addClass('active ' + activeTriggerClass);
 
   $triggers.on('click', function() {
-      $('.active').removeClass('active');
-      $(this).addClass('active');
+      $('.active').removeClass('active').removeClass(activeTriggerClass);
+      $(this).addClass('active ' + activeTriggerClass);
       $contents.eq($triggers.index(this)).addClass('active');
   });
 }

@@ -19,3 +19,7 @@
 .newtab > span.active {
   border-bottom: none;
 }
+
+.ui-tab-active {
+  color:red;
+}
