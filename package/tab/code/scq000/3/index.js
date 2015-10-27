@@ -12,8 +12,9 @@ function tab(options) {
   var $element = $(options.element);
   var $triggers = $(options.triggers);
   var $contents = $(options.contents);
-  $contents.eq(options.activeIndex).addClass('active');
-  $triggers.eq(options.activeIndex).addClass('active');
+  var activeIndex = options.activeIndex || 0;
+  $contents.eq(activeIndex).addClass('active');
+  $triggers.eq(activeIndex).addClass('active');
 
   $triggers.on('click', function() {
       $('.active').removeClass('active');
