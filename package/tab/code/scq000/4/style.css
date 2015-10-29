@@ -1,0 +1,25 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.triggers{
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px solid #eee;
+  display: inline-block;
+}
+.contents {
+  display: none;
+}
+.newtab > div.active {
+  display: block;
+}
+.newtab > span.active {
+  border-bottom: none;
+}
+
+.ui-tab-active {
+  color:red;
+}
