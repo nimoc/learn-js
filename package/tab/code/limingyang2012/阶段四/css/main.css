@@ -1,0 +1,32 @@
+/******reset******/
+html,body{
+	padding:0px;
+	margin: 0px;
+}
+/*******main.css*******/
+.newtab{
+	width:500px;
+	height:200px;
+	margin: 50px auto;
+}
+.triggers{
+	color:#058;
+	font-size:24px;
+	padding:4px 16px;
+	cursor: pointer;
+	border-bottom:2px solid #faa;
+}
+.active{
+	border: 2px solid #faa;
+	border-bottom: none!important;
+	border-radius: 6px 6px 0 0;
+}
+.contents{	
+	font-size: 20px;
+	padding-top: 20px;
+	display: none;
+}
+p{
+	width:100px;
+	margin: 0px auto;
+}
