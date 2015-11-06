@@ -34,7 +34,7 @@
 </head>
 <body>
 	<div class="newtab">
-		<span class="triggers active">tab1</span>
+		<span class="triggers">tab1</span>
 		<span class="triggers">tab2</span>
 		<span class="triggers">tab3</span>
 		<span class="contents">我的tab1的内容</span>
@@ -42,81 +42,70 @@
 		<span class="contents">我的tab3的内容</span>
 	</div>
 	<script type="text/javascript">
-	function tab (opstion) {
-		this.newtab             = document.querySelector(opstion.element);
-		this.triggers           = document.querySelectorAll(opstion.triggers);
-		this.contents           = document.querySelectorAll(opstion.contents);
-		this.activeIndex        = opstion.activeIndex ? opstion.activeIndex : 0;
-		this.activeTriggerClass = opstion.activeTriggerClass ? opstion.activeTriggerClass : 'ui-tab-active';
-		this.triggerrepace      = opstion.triggers.replace('.','') + ' ';
-		this.triggersClass      = this.triggerrepace + this.activeTriggerClass;
-		this.triggerType        = opstion.triggerType ? opstion.triggerType : 'click';
-		this.onSwitch           = opstion.onSwitch;
+	;(function () {
 
-		// 初始函数调用
-		this.retab();
+		var tab = function (option) {
+			this.element       = document.querySelector(option.element);
+			this.triggers      = document.querySelectorAll(option.triggers);
+			this.contents      = document.querySelectorAll(option.contents);
+			this.active        = option.activeTriggerClass;
+			this.triggersClass = option.triggers.replace('.','');
+			this.activeIndex = option.activeIndex || 0;
+			this.triggerType = option.triggerType || 'onclick';
+			this.onSwitch = option.onSwitch;
+			// 初始化调用
 
-		// 事件添加调用
-		this.tabEvent(this);
-	}
-
-
-	// tab初始
-	tab.prototype.retab = function () {
-		for(var i = 0 ; i < this.triggers.length ; i++){
-			this.contents[i].style.display = 'none';
+			this.init();
 		}
-		this.contents[this.activeIndex].style.display = 'block';
-		this.triggers[this.activeIndex].className = this.triggersClass;
-	}
 
+		tab.prototype = {
 
-	// tab功能
-	tab.prototype.tabfc = function (_this) {
-		for( var j = 0 ; j < this.triggers.length ; j++ ){
-			this.triggers[j].className = '';
-			this.triggers[j].className = this.triggerrepace;
-			this.contents[j].style.display = 'none';
+			// 初始化
+			init : function () {
+				var _this = this;
+				this.methods(this.activeIndex, _this);
+				this.bing(_this);
+			},
+
+			// 事件绑定
+			bing : function (_this) {
+				for (var i = 0; i < this.triggers.length; i++) {
+					this.triggers[i].index = i;
+					this.triggers[i].onclick = function () {
+						_this.methods(this.index, _this);
+					}
+				} 
+			},
+
+			// 功能方法
+			methods : function (activeIndex, _this) {
+				for (var i = 0; i < _this.triggers.length; i++) {
+					_this.triggers[i].className = this.triggersClass;
+					_this.contents[i].style.display = 'none';
+				} 
+				_this.triggers[activeIndex].className = this.triggersClass + " " + this.active;
+				_this.contents[activeIndex].style.display = 'block';
+				if (this.onSwitch) {
+					if(this.num) this.onSwitch(activeIndex, _this.triggers.length);
+					this.num  = 1;
+				} 
+			},
 		}
-		_this.className = this.triggersClass;
-		this.contents[_this.index].style.display = 'block';
-		if(this.onSwitch) this.onSwitch(_this.index,this.triggers.length);
-	}
 
-
-	// tab事件
-	tab.prototype.tabEvent = function (_this) {
-		for(var i = 0 ; i < this.triggers.length ; i++){
-			this.triggers[i].index = i;
-			if(this.triggerType == 'click'){
-				this.triggers[i].onclick = function(){
-					_this.tabfc(this);
-				}
-			}else{
-				this.triggers[i].onmouseover = function(){
-					_this.tabfc(this);
-				}
+		var tab2 = new tab({
+			element: '.newtab',
+			triggers: '.triggers',
+			contents: '.contents',
+			activeIndex: 1,
+			activeTriggerClass: 'ui-tab-active',
+			triggerType : 'hover',
+			onSwitch : function (index, count) {
+				alert('当前是第'+ index + '个选项卡共有' + count + '个选项')
 			}
-		}
-	}
+		});
 
+	})()
 
-	var tab1 = new tab({
-		element: '.newtab',
-		triggers: '.triggers',
-		contents: '.contents',
-		triggerType: 'click',
-		activeTriggerClass: 'ui-tab-active',
-		activeIndex: 0,
-		onSwitch: function (index, count) {
-        /*
-        index 是当前 trigger 的索引
-        count 是 trigger 的总数
-        */
-        // alert('这是选项卡'+ index +'\n共有个选项卡'+ count +'');
-    	}
-	})
-
-</script>
+	</script>
 </body>
 </html>
