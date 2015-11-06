@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>dialog弹出窗第一阶段</title>
+	<title>dialog弹出窗第三阶段</title>
 	<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
 	<style>
 		.dialog{
@@ -46,61 +46,66 @@
 	</div>
 	<button type="button" id="btn">click me!</button>
 	<script>
-		function dialog (opstion) {
-			this.trigger   = $(opstion.trigger);
-			this.content   = opstion.content;
-			this.effectShow = opstion.effectShow;
-			this.effectHide = opstion.effectHide;
-			this.Reset();
-			this.Event();
-		}
+		;(function () {
+			var dialog = function (option) {
+				this.content    = option.content;
+				this.trigger    = $(option.trigger);
+				this.effectShow = option.effectShow;
+				this.effectHide = option.effectHide;
 
-		// 初始
-		dialog.prototype.Reset = function () {
-			$('.dialog').hide();
-		}
+				// 初始化调用
+				this.init();
+			}
 
-		// 事件配置
-		dialog.prototype.Event = function () {
-			var _this = this;
-			this.trigger.on('click', function () {
-				_this.fc()
-				if($('.dialog').css('display') == 'none'){
-					if(this.effectShow) {
-						this.effectShow($('.dialog'));
+			dialog.prototype = {
+
+				// 初始化
+				init: function () {
+					$('.dialog').hide();
+					this.bind()
+				},
+
+				// 事件绑定
+				bind: function () {
+					var _this = this;
+					this.trigger.on('click', function () {
+						_this.show();
+					})
+					$('.dialog .dialog-tit-close').on('click', function () {
+						_this.hide(fun);
+					})
+				},
+
+				// 显示方法
+				show: function () {
+					$('.dialog .dialog-container').html(this.content);
+					if(this.effectShow){
+						this.effectShow($('.dialog'))
 					}else{
 						$('.dialog').show();
 					}
-				}
-			})
+				},
 
-			$('.dialog-tit-close').on('click', function () {
-				if($('.dialog').css('display') == 'block'){
+				// 隐藏方法
+				hide: function () {
 					if(this.effectHide){
-						this.effectHide($('.dialog'));
+						this.effectHide($('.dialog'))
 					}else{
-						$('.dialog').hide()
+						$('.dialog').hide();
 					}
 				}
-			})
-		}
-
-		// 功能配置
-		dialog.prototype.fc = function (){
-			
-			$('.dialog .dialog-container').html(this.content);
-		}
-
-		var demo = new dialog({
-			trigger : '#btn',
-			content : '哈哈',
-			effectShow : function (ele) {
-				ele.fadeIn(500);
-			},
-			effectHide : function (ele) {
-				ele.fadeOut(500);
 			}
-		});
+			var demo = new dialog({
+				trigger: '#btn',
+				content: '哈哈',
+				effectShow: function ($element) {
+					$element.fadeIn(500)
+				},
+				effectHide: function ($element) {
+					$element.fadeOut(500)
+				}
+			});
+		})()
 	</script>
 </body>
 </html>

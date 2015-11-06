@@ -46,19 +46,25 @@
 	</div>
 	<button id="btn">click me!</button>
 	<script>
-		function dialog () {
-			this.Reset();
-			this.Show();
-		}
+		;(function () {
+			function dialog () {
+				this.init();
+				this.Show();
+			}
 
-		dialog.prototype.Reset = function () {
-			$('.dialog').hide();
-		}
-		dialog.prototype.Show = function () {
-			$('#btn').on('click', function () {
-				$('.dialog').show();
-			})
-		}
+			dialog.prototype = {
+				init : function () {
+					$('#btn').on('click', function () {
+						$('.dialog').show();
+					})
+				},
+
+				show : function () {
+					$('.dialog').hide();
+				}
+			}
+		})()
+
 		var demo = new dialog();
 	</script>
 </body>
