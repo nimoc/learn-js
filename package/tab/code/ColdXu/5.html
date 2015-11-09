@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>tab选项卡第五阶段</title>
+	<title>tab选项卡面向对象</title>
 	<style type="text/css">
 		.newtab{
 			width:220px;
@@ -34,7 +34,7 @@
 </head>
 <body>
 	<div class="newtab">
-		<span class="triggers active">tab1</span>
+		<span class="triggers">tab1</span>
 		<span class="triggers">tab2</span>
 		<span class="triggers">tab3</span>
 		<span class="contents">我的tab1的内容</span>
@@ -42,63 +42,79 @@
 		<span class="contents">我的tab3的内容</span>
 	</div>
 	<script type="text/javascript">
-		var tab = function (opstion){
-			var newtab             = document.querySelector(opstion.element);
-			var triggers           = document.querySelectorAll(opstion.triggers);
-			var contents           = document.querySelectorAll(opstion.contents);
-			var activeIndex        = opstion.activeIndex ? opstion.activeIndex : 0;
-			var activeTriggerClass = opstion.activeTriggerClass ? opstion.activeTriggerClass : 'ui-tab-active';
-			var triggersClass      = opstion.triggers.replace('.','') + ' ' + activeTriggerClass;
-			var triggerType        = opstion.triggerType ? opstion.triggerType : 'click';
-			var onSwitch           = opstion.onSwitch;
+	(function (window) {
+		var tab = function (option) {
+			this.triggers      = document.querySelectorAll(option.triggers);
+			this.contents      = document.querySelectorAll(option.contents);
+			this.active        = option.activeTriggerClass;
+			this.triggersClass = option.triggers.replace('.', '');
+			this.activeIndex = option.activeIndex || 0;
+			this.triggerType = option.triggerType == 'hover' ? 'mouseover' : 'click';
+			this.onSwitch = option.onSwitch;
 
-
-			// tab初始
-			for(var i = 0 ; i < triggers.length ; i++){
-				contents[i].style.display = 'none';
-			}
-			contents[activeIndex].style.display = 'block';
-			triggers[activeIndex].className = triggersClass;
-
-
-			// 事件添加
-			for(var i = 0 ; i < triggers.length ; i++){
-				triggers[i].index = i;
-				if(triggerType == 'click'){
-					triggers[i].onclick = function(){
-						triggersEvent(this);
-					}
-				}else{
-					triggers[i].onmouseover = function(){
-						triggersEvent(this);
-					}
-				}
-			}
-
-
-			// 事件功能
-			function triggersEvent(_this){
-				for( var j = 0 ; j < triggers.length ; j++ ){
-					triggers[j].className = '';
-					triggers[j].className = opstion.triggers.replace('.','');
-					contents[j].style.display = 'none';
-				}
-				_this.className = triggersClass;
-				contents[_this.index].style.display = 'block';
-				if(onSwitch) onSwitch(_this.index,triggers.length);
-			}
-
+			// 初始化调用
+			this.init();
 		}
-		tab({
-			element: '.newtab',
-			triggers: '.triggers',
-			contents: '.contents',
-			triggerType: 'click',
-			activeTriggerClass: 'ui-tab-active',
-			onSwitch: function (index, count) {
-				alert('这是选项卡'+ index +'\n共有个选项卡'+ count +'');
+
+		tab.prototype = {
+			// 初始化
+			init: function () {
+				var _this = this;
+
+				// 初始调用
+				this.methods(this.activeIndex, _this);
+
+				// 调用事件绑定
+				this.bind();
+			},
+
+			// 事件绑定
+			bind: function () {
+				var _this = this;
+				for (var i = 0; i < this.triggers.length; i++) {
+					this.triggers[i].index = i;
+					this.triggers[i].addEventListener(this.triggerType, function () {_this.methods(this.index)}, false);
+				} 
+			},
+
+			// 功能方法
+			methods: function (activeIndex) {
+
+				// 清空类及隐藏所有
+				for (var i = 0; i < this.triggers.length; i++) {
+					this.triggers[i].className = this.triggersClass;
+					this.contents[i].style.display = 'none';
+				} 
+
+				// 添加类
+				this.triggers[activeIndex].className = this.triggersClass + " " + this.active;
+
+				// 显示内容
+				this.contents[activeIndex].style.display = 'block';
+
+				// 触发提示
+				if (this.onSwitch) {
+					if(this.num) this.onSwitch(activeIndex, this.triggers.length);
+					this.num  = 1;
+				} 
 			}
-		})
+		}
+
+		window.tab = tab;
+		
+	})(window)
+
+	var tab2 = new tab({
+		element: '.newtab',
+		triggers: '.triggers',
+		contents: '.contents',
+		activeIndex: 1,
+		activeTriggerClass: 'ui-tab-active',
+		triggerType : 'hover',
+			// onSwitch : function (index, count) {
+			// 	alert('当前是第'+ index + '个选项卡共有' + count + '个选项')
+			// }
+		});
 	</script>
 </body>
 </html>

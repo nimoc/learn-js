@@ -10,7 +10,11 @@ $(document).ready(function () {
         },
         effectHide: function (element) {
             element.fadeOut();
+        },
+        onClose: function (element) {
+            alert('d')
         }
+
     });
 });
 /**
