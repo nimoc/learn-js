@@ -61,11 +61,11 @@
 			init: function () {
 				var _this = this;
 				this.methods(this.activeIndex, _this);
-				this.bing(_this);
+				this.bind(_this);
 			},
 
 			// 事件绑定
-			bing: function (_this) {
+			bind: function (_this) {
 				for (var i = 0; i < this.triggers.length; i++) {
 					this.triggers[i].index = i;
 					this.triggers[i].addEventListener(this.triggerType, function () {_this.methods(this.index, _this)}, false);
