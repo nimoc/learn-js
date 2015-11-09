@@ -65,35 +65,36 @@
 				this.methods(this.activeIndex, _this);
 
 				// 调用事件绑定
-				this.bind(_this);
+				this.bind();
 			},
 
 			// 事件绑定
-			bind: function (_this) {
+			bind: function () {
+				var _this = this;
 				for (var i = 0; i < this.triggers.length; i++) {
 					this.triggers[i].index = i;
-					this.triggers[i].addEventListener(this.triggerType, function () {_this.methods(this.index, _this)}, false);
+					this.triggers[i].addEventListener(this.triggerType, function () {_this.methods(this.index)}, false);
 				} 
 			},
 
 			// 功能方法
-			methods: function (activeIndex, _this) {
+			methods: function (activeIndex) {
 
 				// 清空类及隐藏所有
-				for (var i = 0; i < _this.triggers.length; i++) {
-					_this.triggers[i].className = this.triggersClass;
-					_this.contents[i].style.display = 'none';
+				for (var i = 0; i < this.triggers.length; i++) {
+					this.triggers[i].className = this.triggersClass;
+					this.contents[i].style.display = 'none';
 				} 
 
 				// 添加类
-				_this.triggers[activeIndex].className = this.triggersClass + " " + this.active;
+				this.triggers[activeIndex].className = this.triggersClass + " " + this.active;
 
 				// 显示内容
-				_this.contents[activeIndex].style.display = 'block';
+				this.contents[activeIndex].style.display = 'block';
 
 				// 触发提示
 				if (this.onSwitch) {
-					if(this.num) this.onSwitch(activeIndex, _this.triggers.length);
+					if(this.num) this.onSwitch(activeIndex, this.triggers.length);
 					this.num  = 1;
 				} 
 			}

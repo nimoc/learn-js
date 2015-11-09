@@ -10,7 +10,8 @@
 	<script>
 		(function (window) {
 			var dialog = function (option) {
-				this.content    = option.content;
+				this.content    = option.content || '';
+				this.title      = option.title || '';
 				this.trigger    = $(option.trigger);
 				this.effectShow = option.effectShow || function (element) {element.show()};
 				this.effectHide = option.effectHide || function (element) {element.hide()}; 
@@ -25,36 +26,35 @@
 				init: function () {
 					var _this = this;
 					this.trigger.on('click', function () {
-						_this.method(_this);
+						_this.method();
 					})
 				},
 
 				//功能方法
-				method: function (_this) {
-
+				method: function () {
 					// 阻止重复打开
 					for (var i = 0; i < $('.dialog').length; i++){
 						if ($('.dialog:eq('+ i +')').css('display') == 'block') return false;
 					}
 
 					// 创建dom对象
-					_this.create(_this);
+					this.create();
 
 					// 打开dom
-					_this.effectShow(_this.dialog);
+					this.effectShow(this.dialog);
 
 					// 关闭事件绑定
-					_this.dialog.find('.dialog-tit-close').on('click', function () {
+					var _this = this;
+					this.dialog.find('.dialog-tit-close').on('click', function () {
 						_this.effectHide(_this.dialog);
 						if (_this.onClose) _this.onClose(_this.dialog);
 					})
 				},
 
 				// 创建dom对象
-				create: function (_this) {
-
+				create: function () {
 					// 阻止重复创建
-					if (typeof _this.dialog != 'undefined') return false;
+					if (typeof this.dialog != 'undefined') return false;
 
 					// html结构创建
 					var dialog = '<div class="dialog">\
@@ -64,16 +64,19 @@
 					<div class="dialog-container"></div></div>';
 
 					// 转换为jquery对象
-					_this.dialog = $(dialog);
+					this.dialog = $(dialog);
 
 					// 插入body
-					$('body').append(_this.dialog);
+					$('body').append(this.dialog);
 
-					// 增加内容
-					_this.dialog.children('.dialog-container').append(this.content);
+					// 插入标题
+					this.dialog.children('.dialog-tit').append(this.title);
 
+					// 插入内容
+					this.dialog.children('.dialog-container').append(this.content);
+					
 					// dialog属性设置
-					_this.dialog.css({
+					this.dialog.css({
 						position:'fixed',
 						width:'600px',
 						height:'200px',
@@ -86,7 +89,7 @@
 						display:'none'
 					});
 
-					_this.dialog.children('.dialog-tit').css({
+					this.dialog.find('.dialog-tit').css({
 						padding:'10px',
 						lineHeight:'25px',
 						height:'25px',
@@ -94,7 +97,11 @@
 						position:'relative'
 					});
 
-					_this.dialog.children('.dialog-tit .dialog-tit-close').css({
+					this.dialog.find('.dialog-container').css({
+						padding:'10px'
+					});
+
+					this.dialog.find('.dialog-tit-close').css({
 						position: 'absolute',
 						height:'10px',
 						width:'10px',
@@ -111,7 +118,8 @@
 
 		var demo = new dialog({
 				trigger: '#btn2',
-				content: '哈哈',
+				content: '我是内容',
+				title: '我是标题',
 				effectShow: function ($element) {
 					$element.fadeIn(500)
 				},
