@@ -60,7 +60,11 @@
 			// 初始化
 			init: function () {
 				var _this = this;
+
+				// 初始调用
 				this.methods(this.activeIndex, _this);
+
+				// 调用事件绑定
 				this.bind(_this);
 			},
 
@@ -74,12 +78,20 @@
 
 			// 功能方法
 			methods: function (activeIndex, _this) {
+
+				// 清空类及隐藏所有
 				for (var i = 0; i < _this.triggers.length; i++) {
 					_this.triggers[i].className = this.triggersClass;
 					_this.contents[i].style.display = 'none';
 				} 
+
+				// 添加类
 				_this.triggers[activeIndex].className = this.triggersClass + " " + this.active;
+
+				// 显示内容
 				_this.contents[activeIndex].style.display = 'block';
+
+				// 触发提示
 				if (this.onSwitch) {
 					if(this.num) this.onSwitch(activeIndex, _this.triggers.length);
 					this.num  = 1;
