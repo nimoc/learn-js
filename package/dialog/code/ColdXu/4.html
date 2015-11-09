@@ -38,57 +38,73 @@
 </head>
 <body>
 	<button type="button" id="btn2">click me! 2</button>
-	<button type="button" id="btn">click me!</button>
 	<script>
-		;(function () {
+		(function (window) {
 			var dialog = function (option) {
 				this.content    = option.content;
 				this.trigger    = $(option.trigger);
 				this.effectShow = option.effectShow || function (element) {element.show()};
 				this.effectHide = option.effectHide || function (element) {element.hide()}; 
 				this.onClose    = option.onClose;
-				console.log(this.effectHide)
-				console.log(this.effectShow)
 
 				// 初始化调用
 				this.init();
 			}
 
 			dialog.prototype = {
-
 				// 初始化
 				init: function () {
-					this.bind()
-				},
-
-				// 事件绑定
-				bind: function () {
 					var _this = this;
 					this.trigger.on('click', function () {
-						_this.open(this.dialog, _this);
+						_this.method(_this);
 					})
-					
 				},
 
-				// 打开方法
-				open: function (dialog, _this) {
-					dialog = '<div class="dialog">\
+				//功能方法
+				method: function (_this) {
+
+					// 阻止重复打开
+					for (var i = 0; i < $('.dialog').length; i++){
+						if ($('.dialog:eq('+ i +')').css('display') == 'block') return false;
+					}
+
+					// 创建dom对象
+					_this.create(_this);
+
+					// 打开dom
+					_this.effectShow(_this.dialog);
+
+					// 关闭事件绑定
+					_this.dialog.find('.dialog-tit-close').on('click', function () {
+						_this.effectHide(_this.dialog);
+						if (_this.onClose) _this.onClose(_this.dialog);
+					})
+				},
+
+				// 创建dom对象
+				create: function (_this) {
+
+					// 阻止重复创建
+					if (typeof _this.dialog != 'undefined') return false;
+
+					// html结构创建
+					var dialog = '<div class="dialog">\
 					<div class="dialog-tit">\
 					<div class="dialog-tit-font"></div>\
 					<div class="dialog-tit-close">X</div></div>\
 					<div class="dialog-container"></div></div>';
 
 					// 转换为jquery对象
-					dialog = $(dialog);
+					_this.dialog = $(dialog);
 
 					// 插入body
-					$('body').append(dialog);
+					$('body').append(_this.dialog);
 
 					// 增加内容
-					dialog.children('.dialog-container').append(this.content);
+					_this.dialog.children('.dialog-container').append(this.content);
 
 					// dialog属性设置
-					dialog.css({
+					_this.dialog.css({
 						position:'fixed',
 						width:'600px',
 						height:'200px',
@@ -101,7 +117,7 @@
 						display:'none'
 					});
 
-					dialog.children('.dialog-tit').css({
+					_this.dialog.children('.dialog-tit').css({
 						padding:'10px',
 						lineHeight:'25px',
 						height:'25px',
@@ -109,7 +125,7 @@
 						position:'relative'
 					});
 
-					dialog.children('.dialog-tit .dialog-tit-close').css({
+					_this.dialog.children('.dialog-tit .dialog-tit-close').css({
 						position: 'absolute',
 						height:'10px',
 						width:'10px',
@@ -117,24 +133,14 @@
 						right:'5px',
 						cursor: 'pointer'
 					})
-
-					// 显示
-					_this.effectShow(dialog);
-					var _dialog = dialog;
-					dialog.find('.dialog-tit-close').on('click', function () {
-						var FUNC = [
-							_this.effectHide(dialog),
-							function() {dialog.fadeOut(),function(){
-								alert('fd')
-							}}
-						];
-						$(document).queue('myAnimation', FUNC);
-						
-					})
-				},
+				}
 			}
 
-			var demo = new dialog({
+			window.dialog = dialog;
+			
+		})(window)
+
+		var demo = new dialog({
 				trigger: '#btn2',
 				content: '哈哈',
 				effectShow: function ($element) {
@@ -143,15 +149,10 @@
 				effectHide: function ($element) {
 					$element.fadeOut(500)
 				},
-				/*onClose: function ($element) {
+				onClose: function ($element) {
 					alert('已经关闭')
-				}*/
+				}
 			});
-			var demo2 = new dialog({
-				trigger: '#btn',
-				content: 'fsdafsadfds',
-			});
-		})()
 	</script>
 </body>
 </html>
