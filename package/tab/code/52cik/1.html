@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>tab 阶段一</title>
+	<style>
+	* {margin: 0; padding: 0; font-size: 12px;}
+
+	.tab {margin: 40px auto;width: 500px;}
+	.tab .hd {overflow: hidden;line-height: 32px;}
+	.tab .hd span {float: left;display: block;padding: 0 1em;border: 1px solid #fff;border-bottom: 1px solid #ddd;color: #4078c0;font-size: 16px;cursor: pointer;}
+	.tab .hd .active {border: 1px solid #ddd;border-bottom: 1px solid #fff;border-radius: 4px 4px 0 0;color: #666;}
+	.tab .bd {overflow: auto;margin-top: -1px;border-top: 1px solid #ddd;}
+	.tab .bd .item {display: none;padding: 1em 0.5em;}
+	.tab .bd .active {display: block;}
+	</style>
+</head>
+<body>
+
+<div class="tab">
+	<div class="hd">
+		<span class="active">tab1</span>
+		<span>tab2</span>
+		<span>tab3</span>
+	</div>
+	<div class="bd">
+		<div class="item active">内容1</div>
+		<div class="item">内容2</div>
+		<div class="item">内容3</div>
+	</div>
+</div>
+
+<div class="tab">
+	<div class="hd">
+		<span class="active">tab1</span>
+		<span>tab2</span>
+		<span>tab3</span>
+	</div>
+	<div class="bd">
+		<div class="item active">内容1</div>
+		<div class="item">内容2</div>
+		<div class="item">内容3</div>
+	</div>
+</div>
+
+<script src="https://dn-cdnjsnet.qbox.me/jquery/1.10.2/jquery.js"></script>
+<script>
+(function () {
+	var $tab = $('.tab');
+
+	$tab.on('click', '.hd span', function () {
+		var $this = $(this);
+		var $item = $this.parents('.tab').find('.item'); // 当前 tab 内的 item，多组共存
+
+		$this.addClass('active').siblings().removeClass('active');
+		$item.removeClass('active').eq($this.index()).addClass('active');
+	});
+})();
+</script>
+</body>
+</html>
