@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>dialog 阶段四</title>
+	<style>
+	*{margin:0;padding:0;font-size:12px;}
+
+	.dialog {display:none;}
+	.dialog .mask{position:absolute;top:0;right:0;bottom:0;left:0;background-color:rgba(0,0,0,.8);}
+	.dialog .box{position:fixed;top:0;right:0;bottom:0;left:0;margin:auto;width:500px;height:160px;background-color:#fff;}
+	.dialog .box .title{padding:0 1em;height:40px;border-bottom:1px solid #ddd;background-color:#eee;font-size:14px;line-height:40px;}
+	.dialog .box .content{padding:1em;}
+	.dialog .box .close{position:absolute;top:0;right:0;display:block;width:2em;text-align:center;font-weight:700;font-size:20px;    line-height:40px;cursor:pointer;}
+
+	.btn {display:block;margin:10px auto;padding:.5em 1em;}
+	</style>
+</head>
+<body>
+
+<button id="btn" class="btn"> 点我 </button>
+<button id="btn2" class="btn"> 点我2 </button>
+
+<div class="dialog">
+	<div class="mask"></div>
+	<div class="box">
+		<div class="title">我是标题</div>
+		<div class="content">我是内容 我是内容</div>
+		<span class="close">&#215;</span>
+	</div>
+</div>
+
+<script src="https://dn-cdnjsnet.qbox.me/jquery/1.10.2/jquery.js"></script>
+<script>
+function dialog (opts) {
+	var opt = $.extend({
+	    trigger: '#btn',
+	    title: '标题',
+	    content: '内容',
+	    effectShow: function ($element) {
+	        // 淡入显示
+	        $element.fadeIn(500)
+	    },
+	    effectHide: function ($element) {
+	        // 淡出显示
+	        $element.fadeOut(500)
+	    }
+	}, opts || {});
+
+	var $dialog = $('.dialog');
+	var $title = $('.title', $dialog);
+	var $content = $('.content', $dialog);
+	var isOpen = false;
+
+	$(opt.trigger).on('click', function () {
+		$title.html(opt.title);
+		$content.html(opt.content);
+
+		isOpen = true;
+		opt.effectShow($dialog);
+
+		// 动态绑定事件
+		$dialog.one('click', '.close', function (e) {
+			isOpen = false;
+			opt.effectHide($dialog);
+			opt.onClose && opt.onClose($dialog[0]);
+		});
+	});
+	
+	$(document).on('keyup', function (e) {
+		if (isOpen && (e.keyCode === 27 || e.which === 27)) {
+			$('.close', $dialog).trigger('click');
+		}
+	});
+}
+
+dialog({trigger: '#btn'});
+dialog({
+	trigger: '#btn2',
+    title: '呵呵',
+    content: '<b>哈哈哈哈</b>',
+    effectShow: function ($el) {
+        $el.show()
+    },
+    effectHide: function ($el) {
+        $el.hide()
+    },
+    onClose: function (element) {
+        /*
+        element 弹出层 DOM 元素
+        */
+       console.log('关闭事件');
+    }
+});
+
+</script>
+</body>
+</html>
