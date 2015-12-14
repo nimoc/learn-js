@@ -1,0 +1,42 @@
+body {
+	font: 14px/1.5 jaf-bernino-sans, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+	background: #ededed;
+}
+/*****basic reset*****/
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+}
+/*tab style*/
+.newtab {	
+	width: 260px;
+	padding: 10px;
+	margin: 40px auto;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	font-size: 0px;
+}
+
+.triggers {
+	display:inline-block;
+	margin-bottom: 5px;
+	padding: 5px 20px;
+	border-bottom: 1px solid #ff5a5f;
+	font-size: 16px;
+}
+
+
+.triggers.active {
+	border: 1px solid #ff5a5f;
+	border-bottom: none;
+}
+
+
+.contents.active {
+	font-size: 14px;
+}

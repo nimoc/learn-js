@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tab</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="newtab">
+    	<span class="triggers active">tab1</span>
+    	<span class="triggers">tab2</span>
+    	<span class="triggers">tab3</span>
+
+    	<span class="contents active">one</span>
+    	<span class="contents">two</span>
+    	<span class="contents">three</span>
+    </div>
+    <script type="text/javascript" src="https://dn-cdnjsnet.qbox.me/jquery/1.10.2/jquery.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">
+    tab({
+    	element: '.newtab',
+    	triggers: '.triggers',
+    	contents: '.contents'
+	})
+    </script>
+</body>
+</html>
