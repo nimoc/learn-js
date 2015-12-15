@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	tab = function tab(obj) {
 		//获取元素
 		var tab = $(obj.element);
