@@ -10,14 +10,9 @@
 		var tabCont = $(obj.contents);
 		// 初始化页面
 		var activeClass = obj.activeTriggerClass || 'ui-tab-active';
-		var activeIndex = obj.activeIndex;
-		if (!activeIndex) {
-			tabNum.eq(0).addClass(activeClass);
-			tabCont.eq(0).addClass(activeClass);
-		}else {
-			tabNum.eq(activeIndex).addClass(activeClass);
-			tabCont.eq(activeIndex).addClass(activeClass);
-		}
+		var activeIndex = obj.activeIndex || 0;
+		tabNum.eq(activeIndex).addClass(activeClass);
+		tabCont.eq(activeIndex).addClass(activeClass);
 		// 实现tab交互
 		tabNew.on('click', obj.triggers, function () {
 			var showTab = $(this);
