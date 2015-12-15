@@ -9,7 +9,7 @@
 		var tabNum = $(obj.triggers);
 		var tabCont = $(obj.contents);
 		// 初始化页面
-		var activeClass = obj.activeTriggerClass;
+		var activeClass = obj.activeTriggerClass || 'ui-tab-active';
 		var activeIndex = obj.activeIndex;
 		if (!activeIndex) {
 			tabNum.eq(0).addClass(activeClass);
