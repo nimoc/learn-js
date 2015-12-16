@@ -1,5 +1,5 @@
 body {
-	font: 14px/1.5 jaf-bernino-sans, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+	font: 14px/1.5 jaf-bernino-sans, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	background: #ededed;
 }
 /*****basic reset*****/
@@ -22,7 +22,7 @@ body {
 }
 
 .triggers {
-	display:inline-block;
+	display: inline-block;
 	margin-bottom: 5px;
 	padding: 5px 20px;
 	border-bottom: 1px solid #ff5a5f;

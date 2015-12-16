@@ -1,5 +1,5 @@
 /**
- * @file tab js file
+ * @file tab3 js file
  * @author murphywuwu
  */
 ;(function () {
