@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width"> 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="newtab">
+        <span class="triggers">tab1</span>
+        <span class="triggers">tab2</span>
+        <span class="triggers">tab3</span>
+
+        <div class="contents">one</div>
+        <div class="contents">two</div>
+        <div class="contents">three</div>
+    </div>
+</body>
+<script src="https://dn-cdnjsnet.qbox.me/jquery/1.10.2/jquery.js"></script>
+<script src="index.js"></script>
+<script>
+tab({
+	element: '.newtab',
+	triggers: '.triggers',
+	contents: '.contents',
+    // 显示第二个 content
+    activeIndex: 1,
+    triggerType: 'hover'
+})
+</script>
+</html>
