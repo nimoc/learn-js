@@ -1,5 +1,5 @@
 /**
- * @file tab2 js file
+ * @file tab1 js file
  * @author murphywuwu
  */
 
