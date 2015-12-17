@@ -1,6 +1,11 @@
+/**
+ * @file tab1 js file
+ * @author murphywuwu
+ */
+
 (function () {
 	var tab = $('.tab');
-	tab.on('click','.nav-list li',function(){
+	tab.on('click', '.nav-list li', function(){
 		var tab_num = $(this);
 		tab_num.addClass('active').siblings().removeClass('active');
 
