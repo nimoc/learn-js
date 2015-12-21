@@ -8,15 +8,28 @@
 	<link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-    <button class="dialog-button">Click Me</button>
-    <div class="dialog-container">
-    	<div class="dialog">
-    		<div class="title">我是标题啊</div>
-    		<div class="content">我是内容，我是内容</div>
-    		<div class="close">X</div>
-    	</div>
-    </div>
-    <script src="https://dn-cdnjsnet.qbox.me/jquery/1.10.2/jquery.js"></script>
+    <button id="showDialog">Click Me</button>
+    <script src="/Users/apple/Documents/测试/jquery-2.1.4.min.js"></script>
     <script src="index.js"></script>
+    <script>
+    var btn = $('#showDialog');
+
+    var dialog = null;
+
+    $(document).ready(function(){
+        if(btn){
+            btn.click(function(){
+                if(!dialog){    
+                    dialog = new Dialog({
+                        title: '小王子',
+                        content: '从前有做山，山里面有一只狐狸，有一天它遇到了一个人，他是麦田色头发蓝眼睛的小王子。。。'
+                    })
+                } else {
+                    $('.dialog-container').show();
+                }
+            })
+        }
+    });
+    </script>
 </body>
 </html>
