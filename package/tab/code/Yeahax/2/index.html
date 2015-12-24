@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab</title>
+<style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+    }
+    .newtab{
+        width: 200px;
+        margin: 50px auto;
+    }
+    .contents{
+        display: none;
+    }
+    .active{
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+    <div class="newtab">
+        <span class="triggers active">1</span>
+        <span class="triggers">2</span>
+        <span class="triggers">3</span>
+
+        <div class="contents">a</div>
+        <div class="contents">b</div>
+        <div class="contents">c</div>
+    </div>
+
+    <script type="text/javascript">
+        function tab(argument) {
+            //获取大的div的className
+            var className = argument.element.substring(1);
+            //获取触发dom
+            var tagName = argument.triggers.substring(1);
+            //获取内容dom
+            var content = argument.contents.substring(1);
+            
+
+            //获取大的div的className的长度
+            var classLength = document.getElementsByClassName(className);
+            //获取触发dom的长度
+            var tagLength = classLength[0].getElementsByClassName(tagName);
+            //获取触发dom的长度
+            var conLength = classLength[0].getElementsByClassName(content);
+
+            
+            var i,j,index;
+            conLength[0].style.display = 'block';
+            for(i = 0;i < tagLength.length;i++){
+                tagLength[i].index = i;
+                tagLength[i].onmouseover = function() {
+                    for(j = 0 ; j < conLength.length; j++){
+                        tagLength[j].className = '' + tagName;
+                        conLength[j].style.display = 'none';
+                    }
+                    tagLength[this.index].className = "active " + tagName;
+                    conLength[this.index].style.display = 'block';
+                }
+            }
+        }
+
+        //调用组件
+        tab({
+            element: '.newtab',
+            triggers: '.triggers',
+            contents: '.contents'
+        });
+    </script>
+</body>
+</html>
