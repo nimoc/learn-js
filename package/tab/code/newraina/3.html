@@ -95,8 +95,13 @@
             throw new ReferenceError('please provide enough arguments!');
         };
 
+        // 定义默认参数
         // 默认初始化显示的标签为第一个
         options.activeIndex = options.activeIndex ? options.activeIndex : 0;
+        // triggers激活时的默认类为ui-tab-active
+        options.activeTriggersClass = options.activeTriggersClass ? options.activeTriggersClass : 'ui-tab-active';
+        // contents激活时的默认类为ui-tab-content-active
+        options.activeContentsClass = options.activeContentsClass ? options.activeContentsClass : 'ui-tab-content-active';
 
         // 定义父级DOM 触发DOM 内容DOM
         var parentElement = document.querySelector(options.element);
@@ -108,8 +113,8 @@
         var contentClassName = options.contents.slice(1);
 
         // 初始化
-        triggerElements[options.activeIndex].className = 'clicked ' + triggerClassName;
-        contentElements[options.activeIndex].className = 'show ' + contentClassName;
+        triggerElements[options.activeIndex].className = options.activeTriggersClass + ' ' + triggerClassName;
+        contentElements[options.activeIndex].className = options.activeContentsClass + ' ' + contentClassName;
 
         // 事件绑定
         parentElement.addEventListener('click', function(event) {
@@ -124,7 +129,7 @@
                     });
 
                     // 给点击到的链接增加选中类
-                    value.className = 'clicked ' + triggerClassName;
+                    value.className = options.activeTriggersClass + ' ' + triggerClassName;
 
                     // 先隐藏所有内容区
                     Array.prototype.forEach.call(contentElements, function(value) {
@@ -132,7 +137,7 @@
                     });
 
                     // 单独显示点击的链接对应的内容区
-                    contentElements[index].className = 'show ' + contentClassName;
+                    contentElements[index].className = options.activeContentsClass + ' ' + contentClassName;
                 }
             })
         });
@@ -142,7 +147,9 @@
         element: '.new-tab',
         triggers: '.triggers',
         contents: '.description',
-        activeIndex: 1
+        activeIndex: 1,
+        activeTriggersClass: 'clicked',
+        activeContentsClass: 'show'
     });
     </script>
 </body>
