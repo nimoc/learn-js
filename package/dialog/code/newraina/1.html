@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹出层 | 第一阶段 | newraina</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: Helvetica, Tahoma, Arial, STXihei, '华文细黑', 'Microsoft YaHei', '微软雅黑', Heiti, '黑体', sans-serif;
+            font-size: 12px;
+
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .dialog-background {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, .1);
+        }
+
+        .dialog {
+            position: absolute;
+            z-index: 1000;
+            top: 50%;
+            left: 50%;
+
+            width: 500px;
+            height: 100px;
+            margin-top: -150px;
+            margin-left: -250px;
+
+            box-shadow: 0 0 80px rgba(0, 0, 0, .3);
+        }
+
+        .header {
+            font-size: 1.5em;
+            font-weight: bold;
+            line-height: 50px;
+
+            height: 50px;
+
+            text-align: center;
+
+            color: #34495E;
+            border-radius: 6px 6px 0 0;
+            background: #1ABC9C;
+        }
+
+        .close-icon {
+            position: relative;
+            float: right;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .close-icon::before, .close-icon::after {
+            content: '';
+            position: absolute;
+            width:100%;
+            top:50%;
+            left:0;
+            background: #FFF;
+        }
+
+        .content {
+            font-size: 1.22em;
+
+            padding: 20px;
+
+            text-align: justify;
+
+            color: #FFF;
+            border-radius: 0 0 6px 6px;
+            background: #34495E;
+        }
+
+    </style>
+</head>
+<body>
+<div class="dialog-background">
+    <section class="dialog">
+        <div class="header">
+            您的浏览器即将爆炸
+            <span class="close-icon"></span>
+        </div>
+        <div class="content">
+            非常遗憾地通知您，因为某些不能明说的原因，我们即将引爆您的浏览器，5秒倒计时会在红圈开始后出现。
+        </div>
+    </section>
+</div>
+<script>
+
+</script>
+</body>
+</html>
