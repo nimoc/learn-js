@@ -64,18 +64,39 @@
             position: relative;
             float: right;
             display: inline-block;
-            width: 50px;
-            height: 50px;
+            width: 15px;
+            height: 15px;
             overflow: hidden;
+            margin-right: 7px;
+            margin-top: 7px;
+            cursor: pointer;
         }
 
         .close-icon::before, .close-icon::after {
             content: '';
             position: absolute;
-            width:100%;
-            top:50%;
-            left:0;
-            background: #FFF;
+            border-radius: 3px;
+            width: 100%;
+            height: 3px;
+            top: 50%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .close-icon::before {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .close-icon::after {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
         }
 
         .content {
@@ -88,6 +109,10 @@
             color: #FFF;
             border-radius: 0 0 6px 6px;
             background: #34495E;
+        }
+
+        .hide {
+            display: none;
         }
 
     </style>
@@ -105,7 +130,33 @@
     </section>
 </div>
 <script>
+    var dialogBackground = document.querySelector('.dialog-background');
+    var dialog = dialogBackground.querySelector('.dialog');
+    var closeIcon = dialog.querySelector('.close-icon');
 
+    closeIcon.addEventListener('click', function () {
+        addClass(dialogBackground, 'hide');
+    });
+
+    // 辅助函数
+    function addClass(element, value) {
+        if (!element.className) {
+            element.className = value;
+        } else {
+            var newClassName  = element.className;
+            newClassName += " ";
+            newClassName += value;
+            element.className = newClassName;
+        }
+    }
+    function removeClass(element, className) {
+        if (element.className && element.className.indexOf(className) >= 0) {
+            var oldClass      = ' ' + element.className + ' ';
+            var newClass      = oldClass.replace(' ' + className + ' ', ' ');
+            newClass          = newClass.replace(/(^\s+)|(\s+$)/g, '');
+            element.className = newClass;
+        }
+    }
 </script>
 </body>
 </html>
