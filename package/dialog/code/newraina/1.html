@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹出层 | 第一阶段 | newraina</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: Helvetica, Tahoma, Arial, STXihei, '华文细黑', 'Microsoft YaHei', '微软雅黑', Heiti, '黑体', sans-serif;
+            font-size: 12px;
+
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .dialog-background {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, .1);
+        }
+
+        .dialog {
+            position: absolute;
+            z-index: 1000;
+            top: 50%;
+            left: 50%;
+
+            width: 500px;
+            height: 100px;
+            margin-top: -150px;
+            margin-left: -250px;
+
+            box-shadow: 0 0 80px rgba(0, 0, 0, .3);
+        }
+
+        .header {
+            font-size: 1.5em;
+            font-weight: bold;
+            line-height: 50px;
+
+            height: 50px;
+
+            text-align: center;
+
+            color: #34495E;
+            border-radius: 6px 6px 0 0;
+            background: #1ABC9C;
+        }
+
+        .close-icon {
+            position: relative;
+            float: right;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            overflow: hidden;
+            margin-right: 7px;
+            margin-top: 7px;
+            cursor: pointer;
+        }
+
+        .close-icon::before, .close-icon::after {
+            content: '';
+            position: absolute;
+            border-radius: 3px;
+            width: 100%;
+            height: 3px;
+            top: 50%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .close-icon::before {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .close-icon::after {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+        .content {
+            font-size: 1.22em;
+
+            padding: 20px;
+
+            text-align: justify;
+
+            color: #FFF;
+            border-radius: 0 0 6px 6px;
+            background: #34495E;
+        }
+
+        .hide {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="dialog-background">
+    <section class="dialog">
+        <div class="header">
+            您的浏览器即将爆炸
+            <span class="close-icon"></span>
+        </div>
+        <div class="content">
+            非常遗憾地通知您，因为某些不能明说的原因，我们即将引爆您的浏览器，5秒倒计时会在红圈开始后出现。
+        </div>
+    </section>
+</div>
+<script>
+    var dialogBackground = document.querySelector('.dialog-background');
+    var dialog = dialogBackground.querySelector('.dialog');
+    var closeIcon = dialog.querySelector('.close-icon');
+
+    closeIcon.addEventListener('click', function () {
+        addClass(dialogBackground, 'hide');
+    });
+
+    // 辅助函数
+    function addClass(element, value) {
+        if (!element.className) {
+            element.className = value;
+        } else {
+            var newClassName  = element.className;
+            newClassName += " ";
+            newClassName += value;
+            element.className = newClassName;
+        }
+    }
+    function removeClass(element, className) {
+        if (element.className && element.className.indexOf(className) >= 0) {
+            var oldClass      = ' ' + element.className + ' ';
+            var newClass      = oldClass.replace(' ' + className + ' ', ' ');
+            newClass          = newClass.replace(/(^\s+)|(\s+$)/g, '');
+            element.className = newClass;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Helvetica, Tahoma, Arial, STXihei, '华文细黑', 'Microsoft YaHei', '微软雅黑', Heiti, '黑体', sans-serif;
+    font-size: 12px;
+
+    margin: 0;
+}
+
+.dialog-container {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    background: rgba(0, 0, 0, .1);
+}
+
+.dialog-background {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, .1);
+}
+
+.dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 500px;
+    height: 100px;
+    margin-top: -150px;
+    margin-left: -250px;
+
+    box-shadow: 0 0 80px rgba(0, 0, 0, .3);
+}
+
+.header {
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 50px;
+
+    height: 50px;
+
+    text-align: center;
+
+    color: #34495e;
+    border-radius: 6px 6px 0 0;
+    background: #1abc9c;
+}
+
+.close-icon {
+    position: relative;
+
+    display: inline-block;
+    float: right;
+    overflow: hidden;
+
+    width: 15px;
+    height: 15px;
+    margin-top: 7px;
+    margin-right: 7px;
+
+    cursor: pointer;
+}
+
+.close-icon::before,
+.close-icon::after {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    content: '';
+
+    border-radius: 3px;
+    background: rgba(255, 255, 255, .5);
+}
+
+.close-icon::before {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+
+.close-icon::after {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+}
+
+.dialog-content {
+    font-size: 1.22em;
+
+    padding: 20px;
+
+    text-align: justify;
+
+    color: #fff;
+    border-radius: 0 0 6px 6px;
+    background: #34495e;
+}
+
+.dialog-hide {
+    display: none;
+}
