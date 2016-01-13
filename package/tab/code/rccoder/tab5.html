@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Tab-4</title>
+    <title>Tab-5</title>
     <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <style>
         * {
@@ -75,6 +75,7 @@
                 var activeIndex = options.activeIndex || 0;
                 var activeTriggerClass = (options.activeTriggerClass || ".ui-tab-active").slice(1);
                 var triggerType = options.triggerType === "hover" ? "mouseover" : "click";
+                var onSwitch = options.onSwitch;
 
 
                 $(".tab").addClass(element);
@@ -90,6 +91,8 @@
                     $that.addClass("active").addClass(activeTriggerClass).siblings().removeClass("active").removeClass(activeTriggerClass);
 
                     $(".tab-content .item").eq($that.index()).addClass("active").siblings().removeClass("active");
+
+                    onSwitch.call(onSwitch, $that.index(), $(".tab .tab-nav li").length)
                 });
             };
 
@@ -104,6 +107,10 @@
                 //activeIndex: 1,
                 //activeTriggerClass: ".ui-tab-active",
                 //triggerType: 'hover',
+                onSwitch: function(index, count) {
+                    console.log(index);
+                    console.log(count)
+                }
             });
         })();
     });
