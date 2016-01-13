@@ -74,6 +74,7 @@
                 var contents = options.contents.slice(1);
                 var activeIndex = options.activeIndex || 0;
                 var activeTriggerClass = (options.activeTriggerClass || ".ui-tab-active").slice(1);
+                var triggerType = options.triggerType === "hover" ? "mouseover" : "click";
 
 
                 $(".tab").addClass(element);
@@ -83,7 +84,7 @@
                 $(".tab .tab-nav li").eq(activeIndex).addClass("active").addClass(activeTriggerClass);
                 $(".tab .tab-content .item").eq(activeIndex).addClass("active");
 
-                $(".tab .tab-nav li").on("click", function() {
+                $(".tab .tab-nav li").on(triggerType, function() {
                     var $that = $(this);
 
                     $that.addClass("active").addClass(activeTriggerClass).siblings().removeClass("active").removeClass(activeTriggerClass);
@@ -102,6 +103,7 @@
                 contents: '.contents',
                 //activeIndex: 1,
                 //activeTriggerClass: ".ui-tab-active",
+                //triggerType: 'hover',
             });
         })();
     });
