@@ -1,0 +1,178 @@
+#tab1 {
+	margin: 50px auto;
+}
+.tab1-title {
+	margin: auto;
+	width: 500px;
+	text-align: center
+}
+.ui-tab-triggers {
+	display: inline-block;
+	width: 50px;
+	height: 25px;
+	text-align: center;
+	border-bottom: 1px solid #333;
+
+
+}
+.triggers-active {
+	border: 1px solid #333;
+	border-bottom: none;
+}
+
+.tab1-content {
+	margin: auto;
+	width: 500px;
+	height: 200px;
+	border: 1px solid #333;
+	border-top: none;
+
+	border-radius:0 0 5px 5px;
+}
+.ui-tab-content {
+	display: none;
+	margin-top: 20px;
+
+	text-align: center;
+}
+.content-active {
+	display: block;
+	opacity: 1;
+}
+
+
+
+
+
+
+#tab2 {
+	margin: 50px auto;
+
+}
+
+.tab2-title {
+	width: 500px;
+	margin: auto;
+}
+
+.box {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+
+	border-radius: 5px;
+	background-color: #ccc;
+}
+
+.box-active {
+	background: #222;
+}
+
+.tab2-content {
+	width: 800px;
+	margin: auto;
+}
+.img {
+	width: 64px;
+}
+
+.img-active {
+	width:128px;
+}
+
+
+#tab3 {
+	width:  400px;
+	height: 430px;
+	margin: 50px auto;
+	background-color: #999;
+	font: 12px Arial;
+}
+.big_pic {
+	width: 400px;
+	height: 320px;
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+	background-color: #222;
+	position: relative;
+}
+.big_pic img {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 400px;
+	height: 320px;
+	
+	opacity: 0;
+	filter: alpha(opacity=0);	
+	z-index: 1;
+
+}
+
+.big_pic img.active {
+
+	opacity: 1;
+	filter: alpha(opacity=100);
+	z-index: 10;
+}
+
+.button {
+	position: absolute;
+	top: 130px;
+
+	filter: alpha(opacity: 30);
+	opacity: 0.3;
+	z-index: 301;
+	cursor: pointer;
+
+}
+
+.button:hover {
+	filter: alpha(opacity: 100);
+	opacity: 1;
+}
+.prev {
+	border: 30px solid transparent;
+	border-right-color: white;
+	
+	left: 10px;
+}
+.next {
+	border: 30px solid transparent;
+	border-left-color: white;
+	
+	right: 10px;
+}
+
+.small_pic {
+	position: relative;
+	top: 7px;
+	left: 10px;
+	width: 380px;
+	height: 94px;
+	overflow: hidden;
+}
+.small_pic ul {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 94px;
+
+}
+.small_pic li {
+	width: 120px;
+	height: 94px;
+	padding-right: 10px;
+	float: left;
+	filter: alpha(opacity:30);
+	opacity: 0.3;
+}
+.small_pic li.active {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.small_pic li img {
+	height:94px;
+}
