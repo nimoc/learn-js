@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab</title>
+	<style type="text/css">
+		*{box-sizing: border-box;}
+		ul{margin:0;padding: 0;}
+		li{list-style: none;}
+		a{text-decoration:none;}
+		.tab{
+			width: 400px;
+			height: 150px;
+			box-shadow: 0 0 10px 5px rgba(0,0,0,.3);
+			margin:200px;
+			padding: 10px;
+			border-radius: 5px;
+		}
+		.tab-hd{
+			border-bottom: 1px solid #ccc;
+			height: 36px;
+		}
+		.triggers{
+			display: block;
+			height: 35px;
+			line-height: 35px;
+			padding: 0 10px;
+			border:1px solid #ccc;
+			border-bottom: 0;
+			border-radius: 5px 5px 0 0;
+			float: left;
+			margin-left: 5px;
+		}
+		.triggers.active{
+			height: 36px;
+			background-color: #fff;
+		}
+		.tab-bd li{display: none;}
+	</style>
+</head>
+<body>
+	<div class="tab">
+		<ul class="tab-hd">
+			<li><a href="#" class="triggers">home</a></li>
+			<li><a href="#" class="triggers">profile</a></li>
+			<li><a href="#" class="triggers">demo</a></li>
+		</ul>
+		<ul class="tab-bd">
+			<li class="contents">昔我往矣,杨柳依依;今我来思,雨雪霏霏.(诗经·小雅·采薇) 译:回想当初出征时,杨柳轻轻飘动.如今回家的途中,雪花粉粉飘落. </li>
+			<li class="contents">2</li>
+			<li class="contents">3</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		(function(){
+			function tab(options){
+					var element=document.querySelector(options.element);
+					var triggers=element.querySelectorAll(options.triggers);
+					var contents=document.querySelectorAll(options.contents);
+					addClass(triggers[0],'active');
+					contents[0].style.display='block';
+					for(var i=0;i<triggers.length;i++){
+						triggers[i].index=i;
+
+						triggers[i].addEventListener('mouseover',function(){
+							for(var i=0;i<triggers.length;i++){
+								removeClass(triggers[i],'active');
+								contents[i].style.display='none';
+							}
+							addClass(this,'active');
+							contents[this.index].style.display='block';
+						},false);
+					}
+			}
+
+			function addClass(element,className){
+				if(!element.className){
+					element.className=className;
+				}else{
+					element.className+=(' '+className);
+				}
+			}
+			function removeClass(element,className){
+				if(element.className&&element.className.indexOf(className)!=-1){
+					var newClass=element.className.replace(className,'');
+					element.className=newClass.replace(/(^\s*|\s*$)/g,'')
+				}
+			}
+			var options={
+    		element: '.tab',
+    		triggers: '.triggers',
+    		contents: '.contents'
+    	};
+    	tab(options);
+		})();
+
+	</script>
+</body>
+</html>
