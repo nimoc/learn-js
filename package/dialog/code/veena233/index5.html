@@ -50,15 +50,15 @@
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		(function(){
-				function dialog(opations){
+				function dialog(options){
 					var body=$('body');
-					$(opations.trigger).on('click',function(){
+					$(options.trigger).on('click',function(){
 						var mask=$('<div class="mask"></div>');
 						body.append(mask);
 						var dialog=$('<div class="dialog" style="display:none"><div class="dialog-hd"><div class="title">标题</div><span class="close-btn">X</span></div><div class="dialog-bd"></div></div>');
 						body.append(dialog);
-						opations.effectshow(dialog);
-						$('.dialog-bd').html(opations.content);
+						options.effectshow(dialog);
+						$('.dialog-bd').html(options.content);
 						$('.close-btn').on('click',hide);
 						$(document).on('keydown',function(e){
 							if(e.keyCode===27){
@@ -66,13 +66,13 @@
 							}
 						});
 						function hide(){
-							opations.effecthide(dialog);
+							options.effecthide(dialog);
 									dialog.remove();
 									mask.remove();
 						}
 					});
 				}
-				var opations={
+				var options={
 					trigger:'#btn',
 					content:'<stong>哈哈</strong>',
 					effectshow:function($element){
@@ -86,7 +86,7 @@
 					}
 				}
 				
-				dialog(opations);
+				dialog(options);
 		})();
 	</script>
 </body>
