@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab</title>
+	<style type="text/css">
+			*{box-sizing: border-box;}
+			body,ul{
+				margin:0;padding: 0;
+			}
+			li{list-style: none;}
+			a{text-decoration: none;}
+			.tab{margin:200px;width: 400px;min-height: 150px;box-shadow: 0 0 10px 5px rgba(0,0,0,.3);border-radius:5px;padding: 10px;}
+			.tab-menu{
+				height: 35px;
+				line-height: 34px;
+				border-bottom: 1px solid #ccc;
+			}
+			.tab-menu li{
+				float: left;
+				margin-left:5px;
+			}
+			.tab-menu li a{
+				display: block;
+				padding: 0 10px;
+				border:1px solid #ccc;
+				border-bottom: 0;
+				border-radius: 5px 5px 0 0;
+			}
+			.tab-menu li a:hover,.tab-menu li a.active{
+				background-color: #fff;
+			}
+			.tab-content li{
+				padding: 10px;
+				display: none;
+			}
+
+	</style>
+</head>
+<body>
+	<div class="tab">
+		<ul class="tab-menu">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Demo</a></li>
+		</ul>
+		<ul class="tab-content">
+			<li>昔我往矣,杨柳依依;今我来思,雨雪霏霏.(诗经·小雅·采薇) 译:回想当初出征时,杨柳轻轻飘动.如今回家的途中,雪花粉粉飘落. </li>
+			<li>知我者,谓我心忧,不知我者,谓我何求.（诗经·王风·黍离） 
+译：知道我的人,说我心烦忧；不知道的,问我有何求.高高在上的老天,是谁害我如此(指离家出走)? </li>
+			<li>一日不见,如三秋兮.（诗经·王风·采葛） </li>
+		</ul>
+		<script type="text/javascript">
+			(function(){
+				var menu_item=document.querySelector('.tab-menu').querySelectorAll('a');
+				var content_item=document.querySelector('.tab-content').querySelectorAll('li');
+				menu_item[0].className='active';
+				content_item[0].style.display='block';
+				for(var i=0;i<menu_item.length;i++){
+					menu_item[i].index=i;
+					menu_item[i].onmouseover=function(){
+						for(var i=0;i<menu_item.length;i++){
+							menu_item[i].className="";
+							content_item[i].style.display='none';
+						}
+						this.className='active';
+						content_item[this.index].style.display='block';
+					}
+				}
+			})();
+
+		</script>
+	</div>
+
+	</script>
+</body>
+</html>
