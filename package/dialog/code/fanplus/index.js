@@ -3,21 +3,35 @@ function Dialog(opt){
 }
 
 Dialog.prototype = {
-    zIndex: 0,
     init: function(opt){
         var _this = this;
-        _this.showDiglog(opt);
-        _this.keyClose(opt);
+        console.log()
+        _this.content();
+        console.log(_this.dialog.name)
+        var dialog = $('.'+_this.dialog.name);
+        var dialogContent = dialog.find($('.'+_this.dialog.content));
+        var close = $('.'+_this.dialog.close);
+        _this.showDiglog(opt,dialog,dialogContent);
+        _this.innerClose(opt,close);
+        _this.keyClose(opt,dialog);
     },
+    dialog: function(){
+        return {
+            name: 'm-dialog',
+            close: 'm-dialog-hd-close',
+            title: 'm-dialog-hd',
+            content: 'm-dialog-bd'
+        }
+    }(),
     content: function(){
         var _this = this;
         var str = `
-            <div class="m-dialog" id="m-dialog-${_this.zIndex}" style="display: none">
-                <span class="m-dialog-hd-close">X</span>
-                <div class="m-dialog-hd m-dialog-${_this.zIndex}-hd">
+            <div class="${_this.dialog.name}" style="display: none">
+                <span class="${_this.dialog.close}">X</span>
+                <div class="${_this.dialog.title}">
                     标题
                 </div>
-                <div class="m-dialog-bd m-dialog-${_this.zIndex}-bd">
+                <div class="${_this.dialog.content}">
                     我是内容，内容
                 </div>
             </div>
@@ -25,35 +39,28 @@ Dialog.prototype = {
         $('body').append(str);
 
     },
-    showDiglog: function(opt){
+    showDiglog: function(opt,dialog,dialogContent){
         var _this = this;
         var cnt = opt.content;
         $(opt.trigger).on('click', function(){
-            _this.content();
-            var dialog = $('#m-dialog-'+_this.zIndex);
-            var dialogContent = dialog.find('.m-dialog-'+_this.zIndex+'-bd');
-            var close = $('.m-dialog-hd-close');
             opt.effectShow(dialog);
             dialogContent.html(cnt);
-            _this.zIndex ++;
-            _this.innerClose(opt,close);
         })
     },
     innerClose: function(opt,close){
-        var i = 0;
-         close.on('click', function(e){
-            var obj = $(this).parent().get(0);
-            opt.effectHide($(obj));
-            obj.remove();
-            console.log(i++)
+        close.on('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            var closeObj = $(this).parent().get(0);
+            opt.effectHide($(closeObj));
         })
     },
-    keyClose: function(opt){
+    keyClose: function(opt,dialog){
         window.addEventListener('keydown', function(e){
             e.preventDefault();
             // console.log(e.code);
             if(e.code == 'Escape'){
-                opt.effectHide($('.m-dialog'));
+                opt.effectHide(dialog);
                 opt.onClose();
                 $('.m-dialog').remove();
             }
