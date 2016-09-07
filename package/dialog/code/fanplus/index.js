@@ -80,6 +80,6 @@ new Dialog({
         $element.fadeOut(500)
     },
     onClose:function(){
-        alert(document.querySelector('.m-dialog-bd').innerHTML)
+        alert(this.content)
     }
 })
