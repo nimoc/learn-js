@@ -53,6 +53,7 @@ Dialog.prototype = {
             e.stopPropagation();
             var closeObj = $(this).parent().get(0);
             opt.effectHide($(closeObj));
+            opt.onClose();
         })
     },
     keyClose: function(opt,dialog){
@@ -62,7 +63,6 @@ Dialog.prototype = {
             if(e.code == 'Escape'){
                 opt.effectHide(dialog);
                 opt.onClose();
-                $('.m-dialog').remove();
             }
         },true)
     }
