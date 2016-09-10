@@ -28,6 +28,7 @@ Dialog.prototype = {
         _this.innerClose(settings,close,dialog);
         _this.keyClose(settings,dialog);
     },
+    // dialog 设置
     dialog: function(){
         return {
             name: 'm-dialog',
@@ -36,9 +37,11 @@ Dialog.prototype = {
             content: 'm-dialog-bd'
         }
     }(),
+    // 改变颜色
     changeColor: function(ele,color){
          $(ele).css('backgroundColor',color);
     },
+    // dialog 内容
     content: function(){
         var _this = this;
         var str = `
@@ -54,6 +57,7 @@ Dialog.prototype = {
         `;
         $('body').append(str);
     },
+    // 显示dialog
     showDiglog: function(settings,dialog,dialogContent){
         var _this = this;
         var cnt = settings.content;
@@ -64,6 +68,7 @@ Dialog.prototype = {
             $(settings.trigger).prop('disabled',true);
         })
     },
+    // dialog 内部关闭按钮行为
     innerClose: function(settings,close,dialog){
         var _this = this;
         close.on('click', function(e){
@@ -77,6 +82,7 @@ Dialog.prototype = {
             $(settings.trigger).prop('disabled',false);
         })
     },
+    // 全局关闭行为
     keyClose: function(settings,dialog){
         var _this = this;
         window.addEventListener('keydown', function(e){
@@ -93,6 +99,7 @@ Dialog.prototype = {
     }
 }
 
+// 调用 Dialog
 new Dialog({
     trigger:'#btn',
     content:'<strong>哈啊哈</strong>',
@@ -104,7 +111,7 @@ new Dialog({
         // 淡出显示
         $element.fadeOut(500)
     },
-    // onClose:function(){
-    //     alert(this.content)
-    // }
+    onClose:function(){
+        alert(this.content)
+    }
 })
