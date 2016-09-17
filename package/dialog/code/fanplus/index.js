@@ -11,30 +11,33 @@ Dialog.prototype = {
             bgEle:'body',
             bgColorGray: 'rgba(12,12,12,.3)',
             bgColorWhite: '#ffffff',
-            content: '<strong>hello world</strong>',
             effectShow: function($e){$e.show()},
             effectHide: function($e){$e.hide()},
+            // set Diglog
+            title: '标题12321',
+            content: '<strong>hello world</strong>',
         }
         // 合并默认及设置
         var settings = Object.assign({},defaults,opt);
         var _this = this;
         console.log(settings)
-        _this.content();
+        _this.content(settings);
         console.log(_this.dialog.name)
         var dialog = $('.'+_this.dialog.name);
-        var dialogContent = dialog.find($('.'+_this.dialog.content));
-        var close = $('.'+_this.dialog.close);
-        _this.showDiglog(settings,dialog,dialogContent);
-        _this.innerClose(settings,close,dialog);
+        _this.showDiglog(settings,dialog);
+
+        _this.innerClose(settings,dialog);
         _this.keyClose(settings,dialog);
+        _this.dialogOk(settings,dialog);
     },
-    // dialog 设置
+    // dialog class设置
     dialog: function(){
         return {
             name: 'm-dialog',
-            close: 'm-dialog-hd-close',
+            close: 'm-dialog-close',
             title: 'm-dialog-hd',
-            content: 'm-dialog-bd'
+            content: 'm-dialog-bd',
+            ok: 'm-dialog-ok',
         }
     }(),
     // 改变颜色
@@ -42,66 +45,84 @@ Dialog.prototype = {
          $(ele).css('backgroundColor',color);
     },
     // dialog 内容
-    content: function(){
+    content: function(settings){
         var _this = this;
         var str = `
             <div class="${_this.dialog.name}" style="display: none">
                 <span class="${_this.dialog.close}">X</span>
                 <div class="${_this.dialog.title}">
-                    标题
+                    ${settings.title}
                 </div>
                 <div class="${_this.dialog.content}">
-                    我是内容，内容
+                    ${settings.content}
+                </div>
+                <div class="m-dialog-ft">
+                    <span class="${_this.dialog.ok}">确定</span>
                 </div>
             </div>
         `;
         $('body').append(str);
     },
     // 显示dialog
-    showDiglog: function(settings,dialog,dialogContent){
+    showDiglog: function(settings,dialog){
         var _this = this;
-        var cnt = settings.content;
         $(settings.trigger).on('click', function(){
             settings.effectShow(dialog);
-            dialogContent.html(cnt);
             _this.changeColor(settings.bgEle,settings.bgColorGray);
             $(settings.trigger).prop('disabled',true);
         })
     },
-    // dialog 内部关闭按钮行为
-    innerClose: function(settings,close,dialog){
+    // 通用关闭行为
+    commonClose: function(settings,dialog){
         var _this = this;
+        settings.effectHide(dialog);
+        _this.changeColor(settings.bgEle,settings.bgColorWhite);
+        $(settings.trigger).prop('disabled',false);
+    },
+    // dialog 内部关闭按钮行为
+    innerClose: function(settings,dialog){
+        var _this = this;
+        var close = dialog.find($('.'+_this.dialog.close));
         close.on('click', function(e){
             e.preventDefault();
-            var closeObj = $(this).parent().get(0);
-            settings.effectHide($(closeObj));
             if(settings.onClose){
                 settings.onClose();
             }
-            _this.changeColor(settings.bgEle,settings.bgColorWhite);
-            $(settings.trigger).prop('disabled',false);
+            _this.commonClose(settings,dialog);
+
         })
     },
-    // 全局关闭行为
+    // 按键关闭行为
     keyClose: function(settings,dialog){
         var _this = this;
         window.addEventListener('keydown', function(e){
-            e.preventDefault();
-            if(e.code === 'Escape'){
-                settings.effectHide(dialog);
-                if(settings.onClose){
-                    settings.onClose();
+            if(!dialog.attr('style')){
+                e.preventDefault();
+                if(e.code === 'Escape'){
+                    if(settings.onClose){
+                        settings.onClose();
+                    }
+                _this.commonClose(settings,dialog);
                 }
-            _this.changeColor(settings.bgEle,settings.bgColorWhite);
-            $(settings.trigger).prop('disabled',false);
             }
         },true)
+    },
+    // dialog ok callback
+    dialogOk: function(settings,dialog){
+        var _this = this;
+        dialog.find($('.'+_this.dialog.ok)).on('click',function(){
+            if(settings.ok){
+                settings.ok();
+            }
+            _this.commonClose(settings,dialog);
+        })
     }
 }
 
 // 调用 Dialog
 new Dialog({
     trigger:'#btn',
+    title: '我是dialog',
     content:'<strong>哈啊哈</strong>',
     effectShow: function ($element) {
         // 淡入显示
@@ -113,5 +134,8 @@ new Dialog({
     },
     onClose:function(){
         alert(this.content)
+    },
+    ok: function(){
+        alert('3213')
     }
 })

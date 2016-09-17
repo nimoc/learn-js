@@ -37,7 +37,7 @@ body{
     text-indent: 20px;
     background-color: rgba(12,12,12,.3);
 }
-.m-dialog-hd-close{
+.m-dialog-close{
     float: right;
     margin-right: 20px;
     cursor: pointer;
@@ -46,6 +46,17 @@ body{
     height: 150px;
     padding: 20px;
     box-sizing: border-box;
+}
+.m-dialog-ft {
+    float: right;
+    margin-top: -50px;
+    margin-right: 10px;
+}
+.m-dialog-ft span{
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #666;
+    cursor: pointer;
 }
 html .m-dialog--hide{
     display: none;
