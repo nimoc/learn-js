@@ -96,7 +96,8 @@ Dialog.prototype = {
     keyClose: function(settings,dialog){
         var _this = this;
         window.addEventListener('keydown', function(e){
-            if(!dialog.attr('style')){
+            console.log(dialog.css('display'))
+            if(dialog.css('display') !== 'none'){
                 e.preventDefault();
                 if(e.code === 'Escape'){
                     if(settings.onClose){
