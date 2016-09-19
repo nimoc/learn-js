@@ -42,8 +42,6 @@
             //    $('.dialog-wrapper').style.display='none';
             //    $('.dialog-mask').style.display='none';
             //})
-
-
         }
     }
     global.Dialog=Dialog;
