@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family: "Microsoft YaHei";
+            font-size: 24px;
+        }
+        .dialog-wrapper{
+            display: none;
+            width: 500px;
+            height: 300px;
+            margin: 0 auto;
+            border: 10px solid #656565;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            background: #FFFFFF;
+        }
+        .dialog-title{
+            height: 55px;
+            line-height: 55px;
+            text-align: center;
+            border-bottom: 2px solid #E1E1E1;
+            background: #FBFBFB;
+        }
+        .dialog-content{
+            font-size: 22px;
+        }
+        .dialog-close{
+            position: absolute;
+            top: 16px;
+            right: 15px;
+            height: 25px;
+            width: 25px;
+            line-height: 25px;
+        }
+        .dialog-mask{
+            display: none;
+            position: absolute;
+            top:0px;
+            bottom: 0px;
+            width: 100%;
+            height: 100%;
+            background: #CCCCCC;
+        }
+    </style>
+</head>
+<body>
+    <button id="toggle-dialog">click me</button>
+    <div class="dialog-mask"></div>
+    <div class="dialog-wrapper">
+        <div class="dialog-title">
+            我真是标题啊
+            <button class="dialog-close">X</button>
+        </div>
+        <div class="dialog-content">我真是内容啊</div>
+    </div>
+</body>
+<script src="dialog.js"></script>
+</html>
