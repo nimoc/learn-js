@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family: "Microsoft YaHei";
+            font-size: 24px;
+        }
+        .tab{
+            width: 50%;
+            margin: 150px auto;
+        }
+        .mynav{
+            float: left;
+            height: 60px;
+            width: 140px;
+            text-align: center;
+            line-height: 60px;
+            border-bottom: 1px solid #dddddd;
+            color: #337AB7;
+        }
+        .myli{
+            clear: left;
+        }
+        .active{
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            border: 1px solid #DDDDDD;
+            border-bottom: 0;
+            color: #717171;
+        }
+    </style>
+</head>
+<body>
+<div class="tab">
+    <header>
+        <span class="mynav active">Home</span>
+        <span class="mynav">Profile</span>
+        <span class="mynav">Demo</span>
+    </header>
+    <section>
+        <div class="myli">123456</div>
+        <div class="myli">7890</div>
+        <div class="myli">不知道写什么了</div>
+    </section>
+</div>
+</body>
+<script type="text/javascript">
+    (function(){
+        function $(element){
+            if(!document.querySelector()){
+
+            }
+            if(element){
+                return document.querySelector(element);
+            }
+        }
+        console.log($('.myli'));
+    })()
+</script>
+</html>
