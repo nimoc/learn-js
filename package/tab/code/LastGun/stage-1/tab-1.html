@@ -17,6 +17,7 @@
             margin: 150px auto;
         }
         .mynav{
+            cursor: pointer;
             float: left;
             height: 60px;
             width: 140px;
@@ -27,6 +28,7 @@
         }
         .myli{
             clear: left;
+            display: none;
         }
         .active{
             border-top-left-radius: 7px;
@@ -39,8 +41,8 @@
 </head>
 <body>
 <div class="tab">
-    <header>
-        <span class="mynav active">Home</span>
+    <header class="tab-header">
+        <span class="mynav">Home</span>
         <span class="mynav">Profile</span>
         <span class="mynav">Demo</span>
     </header>
@@ -51,17 +53,6 @@
     </section>
 </div>
 </body>
-<script type="text/javascript">
-    (function(){
-        function $(element){
-            if(!document.querySelector()){
-
-            }
-            if(element){
-                return document.querySelector(element);
-            }
-        }
-        console.log($('.myli'));
-    })()
-</script>
+<script src="../../../../../static/jquery/1.11.2/jquery.min.js"></script>
+<script src="tab.js"></script>
 </html>
