@@ -13,7 +13,7 @@
             font-size: 24px;
         }
         .dialog-wrapper{
-            /*display: none;*/
+            display: none;
             width: 500px;
             height: 300px;
             margin: 0 auto;
@@ -58,13 +58,21 @@
 <button id="btn">click me</button>
 <div id="container"></div>
 </body>
+<script src="../../../../../static/jquery/1.11.2/jquery.min.js"></script>
 <script src="dialog.js"></script>
 <script>
-    var dialog=new Dialog({
-        triggrt:'#btn',
-        title:'第二个组件',
-        content:'2333哈哈哈！',
-
+    $(document).ready(function () {
+        var dialog=new Dialog({
+            trigger:'#btn',
+            title:'第三版组件',
+            content:'2333哈哈哈！',
+            effectShow: function ($element) {
+                $element.fadeIn(1800)
+            },
+            effectHide: function ($element) {
+                $element.fadeOut(1800)
+            }
+        })
     })
 </script>
 </html>
