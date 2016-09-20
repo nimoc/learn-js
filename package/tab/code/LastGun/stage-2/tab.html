@@ -48,19 +48,26 @@
     </style>
 </head>
 <body>
-<div class="tab">
-    <header class="tab-header">
-        <span class="mynav">Home</span>
-        <span class="mynav">Profile</span>
-        <span class="mynav">Demo</span>
-    </header>
-    <section>
-        <div class="myli">123456</div>
-        <div class="myli">7890</div>
-        <div class="myli">不知道写什么了</div>
-    </section>
-</div>
+    <div class="tab">
+        <header class="tab-header">
+            <span class="mynav">1</span>
+            <span class="mynav">2</span>
+            <span class="mynav">3</span>
+        </header>
+        <section>
+            <div class="myli">a</div>
+            <div class="myli">b</div>
+            <div class="myli">c</div>
+        </section>
+    </div>
 </body>
 <script src="../../../../../static/jquery/1.11.2/jquery.min.js"></script>
 <script src="tab.js"></script>
+<script>
+    var tab=new Tab({
+        element: '.tab',
+        triggers: '.mynav',
+        contents: '.myli'
+    })
+</script>
 </html>
