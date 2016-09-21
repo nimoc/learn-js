@@ -70,7 +70,16 @@
         contents: '.myli',
         activeIndex: 1,
         activeTriggerClass:'active',
-        triggerType:'hover'
+        triggerType:'hover',
+        onSwitch: function (index,count) {
+//            var info='<span>当前trigger索引为:'+index+'  当前trigger总数为：'+count+' </span>'
+            console.log('当前trigger索引为:'+index);
+            console.info('当前trigger总数为：'+count);
+//            var info='当前trigger索引为:'+index+'  当前trigger总数为：'+count
+//            $('.tab').append(info)
+//            alert(index);
+//            alert(count);
+        }
     })
 </script>
 </html>

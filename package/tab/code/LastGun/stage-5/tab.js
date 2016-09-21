@@ -17,6 +17,10 @@
                 $(this).addClass(config.activeTriggerClass).siblings().removeClass(config.activeTriggerClass);
                 var $index=$(config.triggers).index($(this));
                 $(config.contents).css('display','none').eq($index).css('display','block');
+                if(config.onSwitch){
+                    config.onSwitch.call(this,$index,$(config.triggers).length);
+                }
+
             })
         },
         defaultTrigger: function (config) {
@@ -30,3 +34,4 @@
     }
     global.Tab=Tab;
 })(jQuery,window)
+
