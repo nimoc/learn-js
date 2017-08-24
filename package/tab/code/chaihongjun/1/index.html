@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cmn-hans">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name=applicable-device content="pc,mobile">
+    <!-- some meta tags, important for SEO"-->
+    <meta name="description" content="put a short description in here" />
+    <meta name="keywords" content="put your important keywords in here" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>选项卡-第一阶段</title>
+    <style type="text/css">
+    .container {
+        width: 400px;
+        text-align: left;
+    }
+
+    .tab-content {
+        padding: 5px;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var tabs = document.getElementsByTagName('li');
+        var contents = document.getElementsByClassName('tab-pane');
+        for (var i = 0; i < tabs.length; i++) {
+
+            tabs[i].onclick = function() {
+                //单击任意tab的时候，先初始化全部不active
+                for (var i = 0; i < tabs.length; i++) {
+                    tabs[i].index = i;
+                    tabs[i].className = '';
+                    contents[i].className = 'tab-pane';
+
+                }
+                //接着，active点击的tab和对应的content
+                tabs[this.index].className = 'active';
+                contents[this.index].className = 'tab-pane active';
+            };
+        }
+    };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#home" aria-controls="home" role="tab" data-toggle="tab">home</a>
+                </li>
+                <li role="presentation">
+                    <a href="#profile" aria-controls="tab" role="tab" data-toggle="tab">Profile</a>
+                </li>
+                <li role="presentation">
+                    <a href="#demo" aria-controls="tab" role="tab" data-toggle="tab">Demo</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">离离原上草，一岁一枯荣。 野火烧不尽，春风吹又生。 远芳侵古道，晴翠接荒城。 又送王孙去，萋萋满别情。
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    野火烧不尽，春风吹又生。 离离原上草，一岁一枯荣。 远芳侵古道，晴翠接荒城。 又送王孙去，萋萋满别情。
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    远芳侵古道，晴翠接荒城。 离离原上草，一岁一枯荣。 野火烧不尽，春风吹又生。 又送王孙去，萋萋满别情。
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
