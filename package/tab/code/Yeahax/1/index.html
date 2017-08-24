@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab</title>
+<style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+    }
+    .newtab{
+        width: 200px;
+        margin: 50px auto;
+    }
+    .contents div{
+        display: none;
+    }
+    .active{
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <div class="newtab">
+        <div class="triggers">
+            <span class="active">tab1</span>
+            <span>tab2</span>
+            <span>tab3</span>
+        </div>
+        <div class="contents">
+            <div>i am tab 1</div>
+            <div>i am tab 2</div>
+            <div>i am tab 3</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            var trigger = document.getElementsByTagName('span');
+            var content = document.getElementsByClassName('contents')[0].getElementsByTagName('div');
+            var i,j,index;
+            var triLength = trigger.length;
+            var conLength = content.length;
+            content[0].style.display = 'block';
+            for(i = 0;i < triLength;i++){
+                trigger[i].index = i;
+                trigger[i].onmouseover = function() {
+                    for(j = 0 ; j < conLength; j++){
+                        trigger[j].className = "";
+                        content[j].style.display = 'none';
+                    }
+                    trigger[this.index].className = "active";
+                    content[this.index].style.display = 'block';
+                }
+            }
+        })()
+    </script>
+</body>
+</html>

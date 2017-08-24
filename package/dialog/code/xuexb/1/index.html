@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>demo1 dialog for xuexb</title>
+    <meta content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui" name="viewport" />
+    <link rel="stylesheet" type="text/css" href="../mod/dialog.css">
+</head>
+<body>
+    <button id="J-test">妹子你好，点我试试</button>
+    
+    <hr />
+    <div style="height:2000px;">br</div>    
+
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // 弹出层构造函数
+        function Dialog() {
+            var $window = $(window);
+            var tpl = '<div class="ui-dl-inner">\
+                            <div class="ui-dl-hd">\
+                                <h3>我是标题</h3>\
+                                <a class="ui-dl-close" href="#"><i>关闭</i></a>\
+                            </div>\
+                            <div class="ui-dl-cnt">\
+                                从前有个妹子，叫静静，大家都很想她～\
+                            </div>\
+                        </div>';
+
+            // 创建一个包裹容器
+            var $div = $('<div />');
+
+            // 设置她看不见
+            $div.css({
+                position: 'absolute',
+                left: '-9999px',
+                zIndex: 1990
+            });
+
+            // 输出内容到上面
+            $div.html(tpl);
+
+            // 插
+            $(document.body).append($div);
+            
+            // 设置居中，这时候可以获取容器宽高了
+            $div.css({
+                left: ($window.width() - $div.width())/2,
+                top: ($window.height() - $div.height())/2
+            });
+
+            // 关闭事件
+            $div.find('.ui-dl-close').on('click', function(){
+                $div.remove();
+            });
+        }
+
+        // 调用
+        $('#J-test').on('click', function(){
+            Dialog();
+        });
+    </script>
+    
+</body>
+</html>

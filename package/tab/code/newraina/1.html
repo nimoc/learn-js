@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡 | 第一阶段 | newraina</title>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    nav {
+        width: 300px;
+        margin: 20px auto;
+    }
+    
+    ul {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    li {
+        float: left;
+    }
+    
+    a {
+        font-weight: bold;
+        line-height: 40px;
+        z-index: 100;
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        text-decoration: none;
+        color: #337ab7;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    a:hover {
+        color: #555;
+    }
+    
+    .clicked {
+        border: 1px solid #ddd;
+        border-bottom: #fff;
+        border-radius: 5px 5px 0 0;
+    }
+    
+    .description {
+        padding: 10px 0;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+    
+    .show {
+        display: block;
+    }
+    
+    .hide {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <!-- 选项卡 -->
+            <ul>
+                <li>
+                    <a class="clicked" href="#">主页</a>
+                </li>
+                <li>
+                    <a href="#">作品</a>
+                </li>
+                <li>
+                    <a href="#">思索</a>
+                </li>
+            </ul>
+            <!-- 内容 -->
+            <section class="description show">
+                客从远方来，遗我一端绮。 相去万余里，故人心尚尔。 文采双鸳鸯，裁为合欢被。
+            </section>
+            <section class="description hide">
+                迢迢牵牛星，皎皎河汉女。 纤纤擢素手，札札弄机杼。 终日不成章，泣涕零如雨。
+            </section>
+            <section class="description hide">
+                涉江采芙蓉，兰泽多芳草。 采之欲遗谁，所思在远道。 还顾望旧乡，长路漫浩浩。
+            </section>
+        </nav>
+    </header>
+    <script>
+    (function() {
+        var navBar = document.querySelector('nav');
+        var descriptions = navBar.querySelectorAll('.description');
+        var links = navBar.querySelectorAll('a');
+
+        Array.prototype.forEach.call(links, function(value, index) {
+            value.addEventListener('click', function() {
+                // 先清除所有链接的选中类
+                Array.prototype.forEach.call(links, function(value) {
+                    value.className = '';
+                });
+                // 给点击到的链接增加选中类
+                value.className = 'clicked';
+                // 先隐藏所有内容区
+                Array.prototype.forEach.call(descriptions, function(value) {
+                    value.className = 'description hide';
+                });
+                // 单独显示点击的链接对应的内容区
+                descriptions[index].className = 'description show';
+
+                return false;
+            })
+        });
+    })();
+    </script>
+</body>
+
+</html>

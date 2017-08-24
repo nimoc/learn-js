@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.zv-dialog {
+	position: fixed;
+	display: none;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 200px;
+	background: #FFF;
+	border: 5px solid #AAA;
+	margin-top: -105px;
+	margin-left: -255px
+}
+
+.zv-dialog-title {
+	border-bottom: 1px solid #EEE;
+	background: #CCC;
+	overflow: hidden;
+}
+
+.zv-dialog-title h2 {
+	display: inline-block;
+	margin: 5px;
+}
+
+.zv-dialog-close {
+	float: right;
+	width: 20px;
+	height: 20px;
+	background-color: #AAA;
+	margin: 10px;
+	text-align: center;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.zv-dialog-content {
+	padding: 5px;
+}

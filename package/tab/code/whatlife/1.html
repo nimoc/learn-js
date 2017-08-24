@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tab1 普通实现</title>
+    <style>
+    .tab-wrapper {
+        overflow: hidden;
+        clear: both;
+        font-size: 14px;
+    }
+
+    .contents {
+        display: none;
+        top: -1px;
+        position: relative;
+        background: #fff;
+        border-top: 1px solid #ddd;
+        padding: 1em;
+    }
+
+    .triggers {
+        padding: 3px 14px;
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        border: 1px solid transparent;
+    }
+
+    .triggers.active {
+        color: red;
+        display: inline-block;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-bottom: 1px solid transparent;
+    }
+
+    .contents.active {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+<h1>TAB 选项卡 阶段1</h1>
+    <div class="tab-wrapper">
+        <div class="newtab">
+            <span class="triggers active">1</span>
+            <span class="triggers">2</span>
+            <span class="triggers">3</span>
+            <div class="contents active">a</div>
+            <div class="contents">b</div>
+            <div class="contents">c</div>
+        </div>
+    </div>
+</body>
+<script src="../../../../static/jquery/1.11.2/jquery.js"></script>
+<script>
+$(function() {
+    console.log('loaded!');
+    $('.triggers').on('click', function() {
+        var _this = $(this);
+        var index = _this.index();
+        _this.addClass('active').siblings().removeClass('active');
+        $('.contents').eq(index).addClass('active');
+    });
+});
+</script>
+
+</html>

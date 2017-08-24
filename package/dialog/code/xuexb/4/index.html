@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>demo4 dialog for xuexb</title>
+    <meta content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui" name="viewport" />
+    <link rel="stylesheet" type="text/css" href="../mod/dialog.css">
+</head>
+<body>
+    <button id="J-test">妹子你好，点我试试</button>
+    <button id="J-test2">dom</button>
+    
+    <hr />
+    <div style="height:2000px;">br</div>    
+
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // 弹出层构造函数
+        function Dialog(config) {
+            var $trigger;
+
+            // 合并配置
+            config = $.extend(true, {}, {
+                content: 'loading',//内容
+                trigger: null,//触发 元素
+                effectShow: function($elem){//展现方法
+                    $elem.show();
+                },
+                effectHide: function($elem){//隐藏方法
+                    $elem.remove();
+                },
+                onClose: function(){}//关闭回调
+            }, config || {});
+
+            // 触发元素
+            $trigger = config.trigger && $(config.trigger);
+
+            // 如果不存在 
+            if(!$trigger || !$trigger.length){
+                return false;
+            }
+
+            // 绑定弹事件
+            $trigger.on('click', function(){
+                new Dialog.create(config);
+            });
+        }
+
+        // 创建弹出
+        Dialog.create = function(config){
+            var $window, $div, tpl;
+
+            $window = $(window);
+
+            tpl = '<div class="ui-dl-inner">\
+                            <div class="ui-dl-hd">\
+                                <h3>我是标题</h3>\
+                                <a class="ui-dl-close" href="#"><i>关闭</i></a>\
+                            </div>\
+                            <div class="ui-dl-cnt">\
+                            </div>\
+                        </div>';
+
+            // 创建一个包裹容器
+            $div = $('<div />');
+
+            // 设置她看不见
+            $div.css({
+                position: 'absolute',
+                left: '-9999px',
+                zIndex: 1990
+            });
+
+            // 输出内容到上面
+            $div.html(tpl).find('.ui-dl-cnt').html(config.content);
+
+            // 插
+            $(document.body).append($div);
+
+            // 设置居中，这时候可以获取容器宽高了
+            $div.css({
+                left: ($window.width() - $div.width())/2,
+                top: ($window.height() - $div.height())/2
+            }).hide();
+
+            // 调用展现方法
+            config.effectShow($div);
+
+            // 关闭事件
+            $div.find('.ui-dl-close').on('click', function(){
+                // 调用隐藏方法
+                config.effectHide($div);
+
+                // 执行关闭回调
+                config.onClose();
+
+                // 注销事件
+                $(document).off('keydown.dialog-'+ guid);
+            });
+
+            // 绑定esc事件
+            var guid = ++ $.guid;
+            $(document).on('keydown.dialog-'+ guid, function(event){
+                if(event.keyCode === 27){
+                    $div.find('.ui-dl-close').triggerHandler('click');
+                }
+            });
+        }
+
+        // 调用
+        Dialog({
+            trigger: '#J-test',
+            content: 'ok',
+            effectShow: function($elem){
+                $elem.fadeIn();
+            },
+            effectHide: function($elem){
+                $elem.fadeOut(300, function(){
+                    $elem.remove();
+                });
+            },
+            onClose: function(){
+                alert('onClose');
+            }
+        });
+        Dialog({
+        });
+
+        Dialog({
+            trigger: '#J-test2',
+            content: 'DOMDOMDOMDOMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国OMDOMDOM<br>中中中另国国'
+        });
+    </script>
+    
+</body>
+</html>

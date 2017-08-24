@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family: "Microsoft YaHei";
+            font-size: 24px;
+        }
+        .dialog-wrapper{
+            display: none;
+            width: 500px;
+            height: 300px;
+            margin: 0 auto;
+            border: 10px solid #656565;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            background: #FFFFFF;
+        }
+        .dialog-title{
+            height: 55px;
+            line-height: 55px;
+            text-align: center;
+            border-bottom: 2px solid #E1E1E1;
+            background: #FBFBFB;
+        }
+        .dialog-content{
+            font-size: 22px;
+        }
+        .dialog-close{
+            cursor: pointer;
+            position: absolute;
+            top: 16px;
+            right: 15px;
+            height: 25px;
+            width: 25px;
+            line-height: 25px;
+        }
+        .dialog-mask{
+            display: none;
+            position: absolute;
+            top:0px;
+            bottom: 0px;
+            width: 100%;
+            height: 100%;
+            background: #CCCCCC;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">click me</button>
+<div id="container"></div>
+</body>
+<script src="../../../../../static/jquery/1.11.2/jquery.min.js"></script>
+<script src="dialog.js"></script>
+<script>
+    $(document).ready(function () {
+        var dialog=new Dialog({
+            trigger:'#btn',
+            title:'第三版组件',
+            content:'2333哈哈哈！',
+            effectShow: function ($element) {
+                $element.fadeIn(1800)
+            },
+            effectHide: function ($element) {
+                $element.fadeOut(1800)
+            },
+            onClose: function () {
+                alert('2333');
+            }
+        })
+    })
+</script>
+</html>

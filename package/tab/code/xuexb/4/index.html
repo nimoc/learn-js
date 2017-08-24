@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tab 选项卡（第四阶段） By xuexb 谢亮</title>
+
+    <!-- 样式 -->
+    <style type="text/css">
+        .demo ul,
+        .demo li{
+            padding:0;margin:0;
+        }
+        .demo ul{
+            list-style:none;
+        }
+
+        .demo{
+            background-color:#fff;
+            border:1px solid  #ccc;
+        }
+        .demo-nav{
+            line-height:30px;
+            height:30px;
+            background-color:#f0f0f0;
+            border-bottom:1px solid  #ccc;
+        }
+        .demo-nav li{
+            cursor:pointer;
+            float:left;
+            border-right:1px solid  #ccc;
+            width:100px;
+            text-align:center;
+        }
+        /*导航高亮*/
+        .demo-nav li.ui-tab-active{
+            background-color:#fff;
+            height:31px;
+        }
+        /*默认让内容隐藏*/
+        .demo-cnt-item{
+            display:none;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Tab 选项卡（第四阶段） By xuexb 谢亮
+    </h1>
+
+
+    <h2>demo1 默认1</h2>
+    <div class="demo" id="J-demo1">
+        <div class="demo-nav">
+            <ul>
+                <li>选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+            </ul>
+        </div>
+
+        <div class="demo-cnt">
+            <div class="demo-cnt-item item-1">一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一<br>0001000100010001<br>000100010001</div>
+            <div class="demo-cnt-item item-2">二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二<br>00020002000200020002</div>
+            <div class="demo-cnt-item item-3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</div>
+        </div>
+    </div>
+
+    <h2>demo2 默认2+滑过</h2>
+    <div class="demo" id="J-demo2">
+        <div class="demo-nav">
+            <ul>
+                <li>选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+            </ul>
+        </div>
+
+        <div class="demo-cnt">
+            <div class="demo-cnt-item item-1">一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一<br>0001000100010001<br>000100010001</div>
+            <div class="demo-cnt-item item-2">二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二二<br>00020002000200020002</div>
+            <div class="demo-cnt-item item-3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</div>
+        </div>
+    </div>
+
+    
+    <p>
+        <a href="https://github.com/nimojs/learn-js">learn-js</a>: 一个 JavaScript 互助学习的项目。接受组件开发的挑战，提交代码让他人评论你的代码以提高。
+    </p>
+
+
+
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+        var tab = function(options){
+            var $elems, $triggers, $contents;
+
+            //合并默认
+            options = $.extend({
+                triggerType: 'click',
+                activeIndex: 0,//默认高亮的索引
+                activeTriggerClass: 'ui-tab-active',//默认导航的高亮样式
+                element: null,//tab主体
+                triggers: '.triggers',//触发源元素,一般为导航类
+                contents: '.contents'//目标内容
+            }, options || {});
+
+            //使用jquery元素
+            $elems = $(options.element);
+
+            //如果选择器没有元素
+            if(!$elems.length){
+                return null;
+            }
+
+            //触发源元素
+            $triggers = $elems.find(options.triggers);
+
+            //内容元素
+            $contents = $elems.find(options.contents);
+
+            //兼容事件,为了兼容hover和用户乱写
+            if(options.triggerType === 'hover'){
+                options.triggerType = 'mouseenter';
+            } else {
+                options.triggerType = 'click';
+            }
+
+            //绑定触发源事件
+            //这里添加事件空间
+            //添加事件类型支付,如果为hover则为mouseenter
+            $triggers.on(options.triggerType +'.tab', function(){
+                $triggers.removeClass(options.activeTriggerClass);//隐藏导航的类
+                
+                $(this).addClass(options.activeTriggerClass);//添加当前的类
+
+                // $contents.hide().eq($(this).index()).show();//这里是获取当前导航的索引,但是可能导航的dom结构不是同级,所有使用下面来获取更稳定
+                $contents.hide().eq($triggers.index(this)).show();
+            });
+
+            //触发源来显示内容
+            $triggers.eq(options.activeIndex).trigger(options.triggerType +'.tab');//使用事件空间是为了触发导航上的click后引发别的click事件bug
+        }
+    </script>
+
+    <script type="text/javascript">
+        //demo1
+        tab({
+            element: '#J-demo1',
+            triggers: '.demo-nav li',
+            contents: '.demo-cnt-item',
+            triggerType: 'click',
+            activeIndex: 0,
+            activeTriggerClass: 'ui-tab-active'
+        });
+
+        //demo2
+        tab({
+            element: '#J-demo2',
+            triggers: '.demo-nav li',
+            contents: '.demo-cnt-item',
+            activeIndex: 1,
+            triggerType: 'hover',
+            activeTriggerClass: 'ui-tab-active'
+        });
+    </script>
+</body>
+</html>

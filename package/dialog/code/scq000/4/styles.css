@@ -1,0 +1,41 @@
+* {
+  padding: 0;
+  margin: 0;
+  background-color: #eee;
+}
+
+button {
+  margin: 20px;
+}
+
+.dialog {
+  width: 960px;
+   height:300px;
+   position:absolute;
+   left:50%;
+   top:50%;
+   margin:-150px 0 0 -480px;
+  border: 10px solid #ccc;
+  display: none;
+}
+.dialog-header .delete-icon {
+  float: right;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  color: red;
+  cursor: pointer;
+}
+.dialog-header {
+  width: auto;
+  height: 50px;
+  padding: 0 20px;
+  line-height: 50px;
+  font-weight: bold;
+  border-bottom: 1px solid #000;
+}
+.dialog-content {
+  width: auto;
+  height: 200px;
+  margin: 10px 20px;
+}

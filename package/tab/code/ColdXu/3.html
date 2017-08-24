@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab选项卡第三阶段</title>
+	<style type="text/css">
+		.newtab{
+			width:220px;
+		}
+		.newtab .triggers{
+			display:block;
+			float: left;
+			width:70px;
+			height:35px;
+			line-height:35px;
+			text-align: center;
+			border-bottom:1px solid #D3D7DC;
+			cursor: pointer;
+		}
+		.newtab .ui-tab-active{
+			border-radius: 3px;
+			border-top:1px solid #D3D7DC;
+			border-left:1px solid #D3D7DC;
+			border-right:1px solid #D3D7DC;
+			border-bottom:none;
+		}
+		.newtab .contents{
+			float: left;
+			width:220px;
+			display:block;
+			padding:5px; 
+		}
+	</style>
+</head>
+<body>
+	<div class="newtab">
+		<span class="triggers active">tab1</span>
+		<span class="triggers">tab2</span>
+		<span class="triggers">tab3</span>
+		<span class="contents">我的tab1的内容</span>
+		<span class="contents">我的tab2的内容</span>
+		<span class="contents">我的tab3的内容</span>
+	</div>
+	<script type="text/javascript">
+		var tab = function (opstion){
+			var newtab             = document.querySelector(opstion.element);
+			var triggers           = document.querySelectorAll(opstion.triggers);
+			var contents           = document.querySelectorAll(opstion.contents);
+			var activeIndex        = opstion.activeIndex ? opstion.activeIndex : 0;
+			var activeTriggerClass = opstion.activeTriggerClass ? opstion.activeTriggerClass : 'ui-tab-active';
+			var triggersClass = opstion.triggers.replace('.','') + ' ' + activeTriggerClass;
+
+			// tab初始
+			for(var i = 0 ; i < triggers.length ; i++){
+				contents[i].style.display = 'none';
+			}
+			contents[activeIndex].style.display = 'block';
+			triggers[activeIndex].className = triggersClass;
+
+			for(var i = 0 ; i < triggers.length ; i++){
+				triggers[i].index = i;
+				triggers[i].onclick = function(){
+
+					for( var j = 0 ; j < triggers.length ; j++ ){
+						triggers[j].className = '';
+						triggers[j].className = opstion.triggers.replace('.','');
+						contents[j].style.display = 'none';
+					}
+					this.className = triggersClass;
+					contents[this.index].style.display = 'block';
+				}
+			}
+		}
+
+		tab({
+			element:'.newtab',
+			triggers:'.triggers',
+			contents:'.contents',
+		})
+
+	</script>
+</body>
+</html>
