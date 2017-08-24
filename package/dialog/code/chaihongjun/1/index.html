@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cmn-hans">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name=applicable-device content="pc,mobile">
+    <!-- some meta tags, important for SEO"-->
+    <meta name="description" content="put a short description in here" />
+    <meta name="keywords" content="put your important keywords in here" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    .modal {
+        display: none;
+    }
+    .modal-dialog {
+        width: 500px;
+        border: 5px solid #4f4f4f;
+    }
+    .modal-content {
+        height: 200px;
+        border-radius: 0;
+    }
+    .modal-backdrop{
+        z-index: -99999;
+    }
+
+    </style>
+    <script>
+    window.onload = function() {
+        var btn = document.getElementsByTagName('a')[0];
+        var modal = document.getElementById('modal-id');
+        var close=document.getElementsByTagName('button')[0];
+        var mask = document.getElementsByClassName('modal-backdrop')[0];
+        btn.onclick = function() {
+            modal.style.display = 'block';
+            modal.className = 'modal fade in';
+            mask.className = "modal-backdrop fade in";
+        };
+        close.onclick=function(){
+           modal.style.display = 'none';
+            modal.className = 'modal fade';
+            mask.className = "modal-backdrop fade";
+        };
+    };
+    </script>
+    <title>Dialog 弹出层</title>
+</head>
+<body>
+    <div class="container">
+        <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Trigger modal</a>
+        <div class="modal fade" id="modal-id">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">我真是标题啊</h4>
+                    </div>
+                    <div class="modal-body">
+                        我是内容 我是内容
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop fade"></div>
+    </div>
+</body>
+</html>
