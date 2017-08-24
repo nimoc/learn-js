@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dialog弹出窗第阶段</title>
+	<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+</head>
+<body>
+	<button type="button" id="btn2">click me! 2</button>
+	<script>
+		(function (window) {
+			var dialog = function (option) {
+				this.content    = option.content || '';
+				this.title      = option.title || '';
+				this.trigger    = $(option.trigger);
+				this.effectShow = option.effectShow || function (element) {element.show()};
+				this.effectHide = option.effectHide || function (element) {element.hide()}; 
+				this.onClose    = option.onClose;
+
+				// 初始化调用
+				this.init();
+			}
+
+			dialog.prototype = {
+				// 初始化
+				init: function () {
+					var _this = this;
+					this.trigger.on('click', function () {
+						_this.method();
+					})
+				},
+
+				//功能方法
+				method: function () {
+					// 阻止重复打开
+					for (var i = 0; i < $('.dialog').length; i++){
+						if ($('.dialog:eq('+ i +')').css('display') == 'block') return false;
+					}
+
+					// 创建dom对象
+					this.create();
+
+					// 打开dom
+					this.effectShow(this.dialog);
+
+					// 关闭事件绑定
+					var _this = this;
+					this.dialog.find('.dialog-tit-close').on('click', function () {
+						_this.effectHide(_this.dialog);
+						if (_this.onClose) _this.onClose(_this.dialog);
+					})
+				},
+
+				// 创建dom对象
+				create: function () {
+					// 阻止重复创建
+					if (typeof this.dialog != 'undefined') return false;
+
+					// html结构创建
+					var dialog = '<div class="dialog">\
+					<div class="dialog-tit">\
+					<div class="dialog-tit-font"></div>\
+					<div class="dialog-tit-close">X</div></div>\
+					<div class="dialog-container"></div></div>';
+
+					// 转换为jquery对象
+					this.dialog = $(dialog);
+
+					// 插入body
+					$('body').append(this.dialog);
+
+					// 插入标题
+					this.dialog.children('.dialog-tit').append(this.title);
+
+					// 插入内容
+					this.dialog.children('.dialog-container').append(this.content);
+					
+					// dialog属性设置
+					this.dialog.css({
+						position:'fixed',
+						width:'600px',
+						height:'200px',
+						left:'50%',
+						top:'50%',
+						marginTop:'-100px',
+						marginLeft:'-300px',
+						border:' 2px solid #CBCBCB',
+						backgroundcolor:'#fff',
+						display:'none'
+					});
+
+					this.dialog.find('.dialog-tit').css({
+						padding:'10px',
+						lineHeight:'25px',
+						height:'25px',
+						backgroundColor:'#F8F8F8',
+						position:'relative'
+					});
+
+					this.dialog.find('.dialog-container').css({
+						padding:'10px'
+					});
+
+					this.dialog.find('.dialog-tit-close').css({
+						position: 'absolute',
+						height:'10px',
+						width:'10px',
+						top:'8px',
+						right:'5px',
+						cursor: 'pointer'
+					})
+				}
+			}
+
+			window.dialog = dialog;
+			
+		})(window)
+
+		var demo = new dialog({
+				trigger: '#btn2',
+				content: '我是内容',
+				title: '我是标题',
+				effectShow: function ($element) {
+					$element.fadeIn(500)
+				},
+				effectHide: function ($element) {
+					$element.fadeOut(500)
+				},
+				onClose: function ($element) {
+					alert('已经关闭')
+				}
+			});
+	</script>
+</body>
+</html>

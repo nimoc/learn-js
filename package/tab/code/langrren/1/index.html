@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tab 选项卡</title>
+	<style>
+	body,div,p{
+		margin: 0;
+		padding: 0;
+	}
+	.tab{
+		margin: 100px auto;
+		box-shadow:0 0 20px #ccc;
+		width: 752px;
+		height: 210px;
+	}
+	.tabHead{
+		margin: 0 10px;
+		border-bottom: solid 2px #ccc;
+		background: #fff;
+		width: 732px;
+		height: 60px;
+	}
+	.tabInput{
+		float: left;
+		margin-top:6px;
+		width: 138px;
+		height: 52px;
+		color: #05b1f9;
+		line-height: 52px;
+		text-align: center;
+		font-size: 28px;
+	}
+	.tabBody{
+		margin: 0px 10px;
+	}
+	.tabText{
+		padding-top:30px;
+		font-size: 24px;
+		color: #000;
+		line-height: 36px;
+	}
+	.active{
+		border:solid 2px #ccc;
+		border-bottom: solid 2px #fff;
+		color:#000;
+	}
+	</style>
+</head>
+<body>
+<div class="tab">
+	<header class="tabHead">
+		<div class="tabInput active">Home</div>
+		<div class="tabInput " >Profile</div>
+		<div  class="tabInput" >Demo</div>
+	</header>
+	<div class="tabBody">
+		<div class="tabText" style="display: none;">
+			<p>
+				离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。
+				远方侵古道，晴翠接荒城。又送王孙去，萋萋满别情。
+			</p>
+		</div>
+		<div class="tabText" style="display: block;">
+			<p>
+				尘劳回脱事非常，紧把绳头做一场。
+				不经一番寒彻骨，那得梅花扑鼻香.
+			</p>
+		</div>
+		<div class="tabText" style="display: none;">
+			<p>
+				昔日齷齪不足夸，今朝放荡思无崖。
+				春风得意马蹄疾，一日看尽长安花。
+			</p>
+		</div>
+	</div>
+</div>
+<script>
+	//阶段一
+	var head=document.querySelector("header.tabHead");
+	var tabInput=document.querySelectorAll("div .tabInput");
+	var tabText=document.querySelectorAll("div .tabText");
+	for (var i = 0; i < tabInput.length; i++) {
+		tabInput[i].index=i;
+	}
+	head.addEventListener("click",function(e){
+		var e=e||window.event;
+		var target=e.target;
+		if(target.nodeName.toLocaleLowerCase()==="div"){
+			for (var i = 0; i < tabInput.length; i++) {
+				tabInput[i].className="tabInput";
+			}
+			target.className+=" active";
+			for (var i = 0; i < tabText.length; i++) {
+				tabText[i].style.display="none";
+			}
+			tabText[target.index].style.display="block";
+
+		}
+	},false)
+</script>
+</body>
+</html>

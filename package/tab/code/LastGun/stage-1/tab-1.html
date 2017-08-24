@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family: "Microsoft YaHei";
+            font-size: 24px;
+        }
+        .tab{
+            width: 700px;
+            height:260px;
+            padding: 15px;
+            margin: 110px auto;
+            border: 1px solid #E0E0E0;
+            box-shadow: 0 0 60px #ccc;
+        }
+        .mynav{
+            cursor: pointer;
+            float: left;
+            height: 60px;
+            width: 140px;
+            text-align: center;
+            line-height: 60px;
+            color: #337AB7;
+        }
+        .myli{
+            clear: left;
+            display: none;
+        }
+        .active{
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            border: 1px solid #DDDDDD;
+            border-bottom: 2px solid #ffffff;
+            color: #717171;
+        }
+        .tab-header{
+            border-bottom: 1px solid #DDDDDD;
+            width: 100%;
+            height: 61px;
+        }
+    </style>
+</head>
+<body>
+<div class="tab">
+    <header class="tab-header">
+        <span class="mynav">Home</span>
+        <span class="mynav">Profile</span>
+        <span class="mynav">Demo</span>
+    </header>
+    <section>
+        <div class="myli">123456</div>
+        <div class="myli">7890</div>
+        <div class="myli">不知道写什么了</div>
+    </section>
+</div>
+</body>
+<script src="../../../../../static/jquery/1.11.2/jquery.min.js"></script>
+<script src="tab.js"></script>
+</html>

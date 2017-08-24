@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab</title>
+	<link rel="stylesheet" href="./css/yahoo reSet.css">
+	<link rel="stylesheet" href="./css/tab.css">
+</head>
+<body>
+	<div id="tab1">
+		<ul class='tab1-title clearfix'>
+			<li class="ui-tab-triggers">1</li>
+			<li class="ui-tab-triggers">2</li>
+			<li class="ui-tab-triggers">3</li>
+			<li class="ui-tab-triggers">4</li>
+			<li class="ui-tab-triggers">5</li>
+			<li class="ui-tab-triggers">6</li>
+		</ul>
+
+		<ul class='tab1-content'>
+			<li class="ui-tab-content">内容一</li>
+			<li class="ui-tab-content">内容二</li>
+			<li class="ui-tab-content">内容三</li>
+			<li class="ui-tab-content">内容四</li>
+			<li class="ui-tab-content">内容五</li>
+			<li class="ui-tab-content">内容六</li>
+		</ul>
+	</div>
+
+	<div id="tab2">
+		<div class='tab2-title'>
+			<span class="box"></span>
+			<span class="box"></span>
+			<span class="box"></span>
+			<span class="box"></span>
+			<span class="box"></span>
+			<span class="box"></span>
+			<span class="box"></span>
+			<span class="box"></span>
+		</div>
+
+		<div class='tab2-content'>
+			<img class="img" src='./img/1.png'>
+			<img class="img" src='./img/2.png'>
+			<img class="img" src='./img/3.png'>
+			<img class="img" src='./img/4.png'>
+			<img class="img" src='./img/5.png'>
+			<img class="img" src='./img/6.png'>
+			<img class="img" src='./img/7.png'>
+			<img class="img" src='./img/8.png'>
+		</div>
+	</div>
+	
+	<div id="tab3">
+		<ul class='big_pic'>
+			<img src='./img/1.png'>
+			<img src='./img/2.png'>
+			<img src='./img/3.png'>
+			<img src='./img/4.png'>
+			<img src='./img/5.png'>
+			<img src='./img/6.png'>
+			<img src='./img/7.png'>
+			<img src='./img/8.png'>
+			
+		</ul>
+		<div class="small_pic">
+			<ul>
+				<li><img src='./img/1.png'></li>
+				<li><img src='./img/2.png'></li>
+				<li><img src='./img/3.png'></li>
+				<li><img src='./img/4.png'></li>
+				<li><img src='./img/5.png'></li>
+				<li><img src='./img/6.png'></li>
+				<li><img src='./img/7.png'></li>
+				<li><img src='./img/8.png'></li>
+			</ul>
+		</div>
+	</div>
+	<script src="./js/common.js"></script>
+	<script src="./js/tab.js"></script>
+	
+
+	<script>
+		var tab1 = document.querySelector("#tab1"),
+			tab2 = document.querySelector("#tab2"),
+			tab3 = document.querySelector("#tab3");
+
+
+		// 默认功能
+		new Tab(tab1);
+
+
+		/**
+		 * 自定义 triggers与content 选择器，
+		 * 自定义激活类名,
+		 * 自定义额为的切换功能
+		 * 开启自动播放功能
+		 */
+		new Tab(tab2, {
+			triggers: ".box",
+			content: ".img",
+			activeTriggerClass: "box-active",
+			activeContentClass: "img-active",
+
+			auto: true,
+			onSwitch: function(options) {
+				var content = options.content,
+					index = options.index,
+					count = options.count,
+					i;
+
+					content[index].style.opacity = 0;
+					content[index].style.filter= "alpha(opacity=0)";
+					for (i=0; i< count; i++) {
+						move(content[i], {opacity: 0});
+					}
+					move(content[index], {
+						opacity: 100
+					});
+			}
+		});
+
+
+		var itemTrigger = tab3.querySelector(".small_pic li"),
+			itemContent = tab3.querySelector(".big_pic img"),
+
+			Height = parseInt(getStyle(itemContent, "height")),
+			Width = parseInt(getStyle(itemTrigger, "width")) + 
+						parseInt(getStyle(itemTrigger, "paddingRight")),
+
+			trigger_contanier = itemTrigger.parentNode;
+
+		
+		trigger_contanier.style.width = 8* Width + "px";
+
+		
+		new Tab(tab3, {
+			triggers: ".small_pic li",
+			content: " .big_pic img",
+			triggerType: "clcik",
+			activeIndex: 0,
+			activeTriggerClass: "active",
+			activeContentClass: "active",
+
+			auto: true,
+			autoSpeed: 2000,
+			delay: 200,
+			
+			// 开启方向按钮控制功能
+			directionControl: true,
+			dir_pre: "prev button",
+			dir_next: "next button",
+			dirControl_parent: 3,
+
+			onSwitch:function(options) {
+				var triggers = options.triggers,
+					content = options.content,
+					index = options.index,
+					len = options.count,
+					i;
+
+
+				// 内容栏效果
+				content[index].style.height = 0;
+				move(content[index], {height: Height});
+
+				// 标签栏效果
+				if (index < 1 ) {
+					move(trigger_contanier, {left: 0});
+				} else if( index > len-2) {
+					move(trigger_contanier, {left: -(index-2)*Width});
+				} else {
+					move(trigger_contanier, {left: -(index-1)*Width});
+				}
+			}
+		});
+	</script>
+</body>
+</html>

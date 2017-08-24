@@ -1,0 +1,97 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tab-2</title>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .demo {
+            position: relative;
+            top: 0;
+            left: 0;
+            margin: 10px;
+        }
+        .tab-nav {
+            overflow: hidden;
+        }
+        .tab-nav ul li {
+            list-style: none;
+            cursor: pointer;
+            float: left;
+            padding: 10px;
+            border-bottom: 2px solid #DDDDDD;
+            font-weight: bold;
+            color: #4078c0;
+        }
+        .tab-nav ul li.active, .tab-nav ul li.triggers {
+            border: 2px solid #DDDDDD;
+            border-bottom: none;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            color: #333333;
+        }
+        .tab-content {
+            margin: 16px 0;
+        }
+        .tab-content .item {
+            display: none;
+        }
+        .tab-content .item.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="demo tab">
+    <div class="tab-nav">
+        <ul>
+            <li class="active">Home</li>
+            <li>Profile</li>
+            <li>Demo</li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="item item-1 active">离离原上草</div>
+        <div class="item item-2">一岁一枯荣</div>
+        <div class="item item-3">野火烧不尽</div>
+    </div>
+</div>
+<script>
+    window.onload = (function () {
+        (function() {
+
+            var tab = function (options) {
+                var element = options.element.slice(1);
+                var triggers = options.triggers.slice(1);
+                var contents = options.contents.slice(1);
+
+                $(".tab").addClass(element);
+                $(".tab .tab-content .item").addClass(contents);
+
+                $(".tab .tab-nav li").on("click", function() {
+                    var $that = $(this);
+
+                    $that.addClass(triggers).siblings().removeClass(triggers).removeClass("active");
+
+                    $(".tab-content .item").eq($that.index()).addClass("active").siblings().removeClass("active");
+                });
+            };
+
+            window.tab = tab;
+        }) ();
+
+        (function() {
+            tab({
+                element: '.newtab',
+                triggers: '.triggers',
+                contents: '.contents'
+            });
+        })();
+    });
+</script>
+</body>
+</html>

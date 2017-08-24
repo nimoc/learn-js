@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tab4 可配置点击切换时触发的函数</title>
+    <style>
+    .tab-wrapper {
+        overflow: hidden;
+        clear: both;
+        font-size: 14px;
+    }
+
+    .contents {
+        display: none;
+        top: -1px;
+        position: relative;
+        background: #fff;
+        border-top: 1px solid #ddd;
+        padding: 1em;
+    }
+
+    .triggers {
+        padding: 3px 14px;
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        border: 1px solid transparent;
+    }
+
+    .triggers.active,
+    .triggers.ui-tab-active {
+        color: red;
+        display: inline-block;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-bottom: 1px solid transparent;
+    }
+
+    .contents.active {
+        display: block;
+    }
+
+    .ui-tab-active {
+        color: red;
+    }
+    </style>
+</head>
+
+<body>
+<h1>TAB 选项卡 阶段五 触发函数</h1>
+    <div class="tab-wrapper">
+        <div class="newtab">
+            <span class="triggers">1</span>
+            <span class="triggers">2</span>
+            <span class="triggers">3</span>
+            <div class="contents">a</div>
+            <div class="contents">b</div>
+            <div class="contents">c</div>
+        </div>
+        <div class="tab2">
+            <span class="triggers">1</span>
+            <span class="triggers">2</span>
+            <span class="triggers">3</span>
+            <div class="contents">a</div>
+            <div class="contents">b</div>
+            <div class="contents">c</div>
+        </div>
+    </div>
+</body>
+<script src="../../../../static/jquery/1.11.2/jquery.js"></script>
+<script>
+$(function() {
+
+    tab({
+        element: '.newtab',
+        triggers: '.triggers',
+        contents: '.contents',
+        activeIndex: 1,
+        activeTriggerClass: 'ui-tab-active',
+        triggerType: 'hover',
+
+        // click 或 hover trigger 时 onSwitch 会执行
+        onSwitch: function(index, count) {
+            console.log(index, count);
+        }
+    });
+    tab({
+        element: '.tab2',
+        triggers: '.triggers',
+        contents: '.contents',
+        activeIndex: 2,
+        activeTriggerClass: 'ui-tab-active',
+        // click 或 hover trigger 时 onSwitch 会执行
+        onSwitch: function(index, count) {
+            /*
+            index 是当前 trigger 的索引
+            count 是 trigger 的总数
+            */
+           console.log(index, count);
+        }
+    })
+});
+
+var tab = function(options) {
+    var $wrapper = $(options.element);
+    var $triggers = $wrapper.find(options.triggers);
+    var $contents = $wrapper.find(options.contents);
+    $triggers.each(function() {
+
+        var count = $triggers.length;
+
+        if (!options.activeIndex) {
+            var _index = 0;
+            $triggers.eq(_index).addClass(options.activeTriggerClass);
+            $contents.eq(_index).addClass('active');
+        } else {
+            $triggers.eq(options.activeIndex).addClass(options.activeTriggerClass);
+            $contents.eq(options.activeIndex).addClass('active');
+        }
+
+        // 通过triggerType触发，默认是click
+        var triggerType;
+        if (options.triggerType && options.triggerType === 'hover') {
+            triggerType = 'hover';
+        } else {
+            triggerType = 'click';
+        }
+
+        $(this)[triggerType](function() {
+
+            var _index = $(this).index();
+            $(this).addClass(options.activeTriggerClass).siblings().removeClass(options.activeTriggerClass);
+            $contents.eq(_index).addClass('active').siblings().removeClass('active');
+
+            options.onSwitch && options.onSwitch(_index, count);
+
+
+        });
+    });
+}
+</script>
+
+</html>

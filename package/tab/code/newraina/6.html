@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡 | 第六阶段 | newraina</title>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    nav {
+        width: 300px;
+        margin: 20px auto;
+    }
+    
+    ul {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    li {
+        float: left;
+    }
+    
+    a {
+        font-weight: bold;
+        line-height: 40px;
+        z-index: 100;
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        text-decoration: none;
+        color: #337ab7;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    a:hover {
+        color: #555;
+    }
+    
+    .clicked {
+        border: 1px solid #ddd;
+        border-bottom: #fff;
+        border-radius: 5px 5px 0 0;
+    }
+    
+    .description {
+        padding: 10px 0;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-top: none;
+        display: none;
+    }
+    
+    .show {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="new-tab">
+            <!-- 选项卡 -->
+            <ul>
+                <li>
+                    <a class="triggers" href="#">主页</a>
+                </li>
+                <li>
+                    <a class="triggers" href="#">作品</a>
+                </li>
+                <li>
+                    <a class="triggers" href="#">思索</a>
+                </li>
+            </ul>
+            <!-- 内容 -->
+            <section class="description">
+                客从远方来，遗我一端绮。 相去万余里，故人心尚尔。 文采双鸳鸯，裁为合欢被。
+            </section>
+            <section class="description">
+                迢迢牵牛星，皎皎河汉女。 纤纤擢素手，札札弄机杼。 终日不成章，泣涕零如雨。
+            </section>
+            <section class="description">
+                涉江采芙蓉，兰泽多芳草。 采之欲遗谁，所思在远道。 还顾望旧乡，长路漫浩浩。
+            </section>
+        </nav>
+    </header>
+    <script>
+    /**
+     * 第六阶段新增的API：
+     * activeDelay：鼠标悬停或点击制定时间后标签才会激活，默认0，单位毫秒
+     * autoPlay：控制选项卡是否自动切换，默认为false
+     * autoPlayDelay：自动切换时的间隔时间，默认1000，单位毫秒
+     */
+    tab({
+        element: '.new-tab',
+        triggers: '.triggers',
+        contents: '.description',
+        activeIndex: 1,
+        activeTriggersClass: 'clicked',
+        activeContentsClass: 'show',
+        triggerType: 'hover',
+        onSwitch: onSwitch,
+        activeDelay: 400,
+        autoPlay: true,
+        autoPlayDelay: 1000
+    });
+
+    function tab(options) {
+        if (!(typeof options) || !(options.element && options.triggers && options.contents)) {
+            throw 'please provide enough arguments!';
+        };
+        if (options.triggerType && !(options.triggerType === 'click' || options.triggerType === 'hover')) {
+            throw 'triggerType must be "click" or "hover"!';
+        }
+
+        // 定义默认参数
+        // 默认初始化显示的标签为第一个
+        options.activeIndex = options.activeIndex ? options.activeIndex : 0;
+        // triggers激活时的默认类为ui-tab-active
+        options.activeTriggersClass = options.activeTriggersClass ? options.activeTriggersClass : 'ui-tab-active';
+        // contents激活时的默认类为ui-tab-content-active
+        options.activeContentsClass = options.activeContentsClass ? options.activeContentsClass : 'ui-tab-content-active';
+        // triggerType默认为click，可选hover(mouseenter + mousele)
+        options.triggerType = options.triggerType === 'hover' ? 'mouseover' : 'click';
+        // 点击切换是默认触发的函数为空函数
+        options.onSwitch = options.onSwitch ? options.onSwitch : function() {};
+        // 
+        options.activeDelay = options.activeDelay ? options.activeDelay : 0;
+        options.autoPlayDelay = options.autoPlayDelay ? options.autoPlayDelay : 1000;
+
+        // 定义父级DOM 触发DOM 内容DOM
+        var parentElement = document.querySelector(options.element);
+        var triggerElements = parentElement.querySelectorAll(options.triggers);
+        var contentElements = parentElement.querySelectorAll(options.contents);
+
+        // 缓存类名
+        var triggerClassName = options.triggers.slice(1);
+        var contentClassName = options.contents.slice(1);
+
+        // 初始化
+        triggerElements[options.activeIndex].className = options.activeTriggersClass + ' ' + triggerClassName;
+        contentElements[options.activeIndex].className = options.activeContentsClass + ' ' + contentClassName;
+
+        var activeTimer = null;
+        var autoPlayTimer = null;
+
+        // 事件绑定
+        parentElement.addEventListener(options.triggerType, function(event) {
+            var target = event.target;
+
+            if (activeTimer) {
+                clearTimeout(activeTimer);
+                activeTimer = null;
+            }
+
+            // 鼠标移入选项卡停止自动切换
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+
+            Array.prototype.forEach.call(triggerElements, function(value, index) {
+                if (target === value) {
+
+                    if (options.activeDelay) {
+                        activeTimer = setTimeout(function() {handle(value, index)}, options.activeDelay);
+                    } else {
+                        handle(value, index);
+                    }
+                }
+            })
+        });
+
+        // 鼠标移出选项卡开始启动切换
+        parentElement.addEventListener('mouseleave', function() {
+            if (options.autoPlay) autoPlay();
+        });
+
+        // 处理选项卡的自动切换
+        if (options.autoPlay) autoPlay();
+
+        function autoPlay() {
+            var index = 0;
+            // 得到当前激活标签的索引
+            for (var i = 0; i < triggerElements.length; i++) {
+                if (triggerElements[i].className.indexOf(options.activeTriggersClass) > -1) {
+                    index = i;
+                    break;
+                }
+            }
+
+            autoPlayTimer = setInterval(function() {tabPlay(index)}, options.autoPlayDelay);
+
+            function tabPlay() {
+                index++;
+                if (index > triggerElements.length - 1) index = 0;
+                handle(triggerElements[index], index);
+            }
+        }
+
+        function handle(element, index) {
+            // 先清除所有链接的选中类
+            Array.prototype.forEach.call(triggerElements, function(value) {
+                value.className = triggerClassName;
+            });
+
+            // 给点击到的链接增加选中类
+            element.className = options.activeTriggersClass + ' ' + triggerClassName;
+
+            // 先隐藏所有内容区
+            Array.prototype.forEach.call(contentElements, function(value) {
+                value.className = contentClassName;
+            });
+
+            // 单独显示点击的链接对应的内容区
+            contentElements[index].className = options.activeContentsClass + ' ' + contentClassName;
+
+            // 触发onSwitcher函数
+            options.onSwitch.call(null, index, triggerElements.length);
+        }
+    }
+
+    function onSwitch(index, count) {
+        console.log('成功切换！！');
+        console.log('触发的选项卡索引：' + index);
+        console.log('选项卡总数：' + count);
+    }
+    </script>
+</body>
+
+</html>

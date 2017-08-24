@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>tab 阶段二</title>
+	<style>
+	* {margin: 0; padding: 0; font-size: 12px;}
+
+	.newtab {clear: both;margin: 40px auto;width: 500px;}
+	.newtab .triggers {float: left;display: block;margin-bottom: -1px;padding: .5em 1em;border: 1px solid #fff;border-bottom: 1px solid #ddd;border-radius: 4px 4px 0 0;color: #4078c0;
+	font-size: 16px;line-height: 32px;}
+	.newtab .triggers.active{border: 1px solid #ddd;border-bottom: 1px solid #fff; color: #666;}
+	.newtab .contents {clear: both;display: none;padding: 1em .5em;border-top: 1px solid #ddd;}
+	.newtab .contents.active{ display:block;}
+	</style>
+</head>
+<body>
+<div class="newtab">
+    <span class="triggers active">1</span>
+    <span class="triggers">2</span>
+    <span class="triggers">3</span>
+
+    <div class="contents active">a</div>
+    <div class="contents">b</div>
+    <div class="contents">c</div>
+</div>
+
+<div class="newtab">
+    <span class="triggers">1</span>
+    <span class="triggers active">2</span>
+    <span class="triggers">3</span>
+
+    <div class="contents">a</div>
+    <div class="contents active">b</div>
+    <div class="contents">c</div>
+</div>
+
+<script src="https://dn-cdnjsnet.qbox.me/jquery/1.10.2/jquery.js"></script>
+<script>
+function tab(opt) {
+	var $wrap = $(opt.element);
+	var $triggers = $(opt.triggers, $wrap);
+
+	$wrap.on('click', opt.triggers, function () {
+		var $this = $(this);
+		var $item = $this.parent().find(opt.contents); // 当前 tab 内的 item，多组共存
+
+		$this.addClass('active').siblings().removeClass('active');
+		$item.removeClass('active').eq($this.index()).addClass('active');
+	});
+}
+
+tab({
+    element: '.newtab',
+    triggers: '.triggers',
+    contents: '.contents'
+});
+</script>
+</body>
+</html>

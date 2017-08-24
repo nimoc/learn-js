@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dialog</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width"> 
+	<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+    <button type="button" id="showDialog">Click Me</button>
+    <script src="https://dn-cdnjsnet.qbox.me/jquery/1.10.2/jquery.js"></script>
+    <script src="index.js"></script>
+    <script>
+    $(document).ready(function () {
+        dialog = new Dialog({
+            title: '小王子',
+            content: '从前有做山，山里面有一只狐狸，有一天它遇到了一个人，他是麦田色头发蓝眼睛的小王子。。。',
+            trigger: '#showDialog',
+            effectShow: function ($element) {
+                // 淡入效果
+                $element.fadeIn(500);
+            },
+            effectHide: function ($element) {
+                // 淡出效果
+                $element.fadeOut(500);
+            }
+        })
+    })
+    </script>
+</body>
+</html>

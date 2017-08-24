@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family: "Microsoft YaHei";
+            font-size: 24px;
+        }
+        .tab{
+            width: 700px;
+            height:260px;
+            padding: 15px;
+            margin: 110px auto;
+            border: 1px solid #E0E0E0;
+            box-shadow: 0 0 60px #ccc;
+        }
+        .mynav{
+            cursor: pointer;
+            float: left;
+            height: 60px;
+            width: 140px;
+            text-align: center;
+            line-height: 60px;
+            color: #337AB7;
+        }
+        .myli{
+            clear: left;
+            display: none;
+        }
+        .active{
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            border: 1px solid #DDDDDD;
+            border-bottom: 2px solid #ffffff;
+            color: #717171;
+        }
+        .tab-header{
+            border-bottom: 1px solid #DDDDDD;
+            width: 100%;
+            height: 61px;
+        }
+    </style>
+</head>
+<body>
+<div class="tab">
+    <header class="tab-header">
+        <span class="mynav">1</span>
+        <span class="mynav">2</span>
+        <span class="mynav">3</span>
+    </header>
+    <section>
+        <div class="myli">a</div>
+        <div class="myli">b</div>
+        <div class="myli">c</div>
+    </section>
+</div>
+</body>
+<script src="../../../../../static/jquery/1.11.2/jquery.min.js"></script>
+<script src="tab.js"></script>
+<script>
+    var tab=new Tab({
+        element: '.tab',
+        triggers: '.mynav',
+        contents: '.myli',
+        activeIndex: 1,
+        activeTriggerClass:'active',
+        triggerType:'hover',
+        onSwitch: function (index,count) {
+//            var info='<span>当前trigger索引为:'+index+'  当前trigger总数为：'+count+' </span>'
+            console.log('当前trigger索引为:'+index);
+            console.info('当前trigger总数为：'+count);
+//            var info='当前trigger索引为:'+index+'  当前trigger总数为：'+count
+//            $('.tab').append(info)
+//            alert(index);
+//            alert(count);
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+		.wrap{
+			width: 200px;
+			margin: 0 auto;
+		}
+			#tab {
+				margin: 10px;
+				border-bottom: 1px solid #e3e3e3;
+			}
+			
+			.triggers {
+				cursor: pointer;
+				margin: 5px;
+				color: #2e77b5;
+			}
+			.ui-tab-active{
+				cursor: pointer;
+				padding-left: 5px;
+				padding-left: 5px;
+				padding-right: 5px;
+				border-radius: 3px 3px 0 0;
+				border-top: 1px solid #e3e3e3;
+				border-right: 1px solid#e3e3e3;
+				border-left: 1px solid#e3e3e3;
+				border-bottom: 2px solid white;
+				color: black;
+			}
+			
+			#content {
+				margin: 10px;
+			}
+			
+			.contents {
+				display: none;
+			}
+			
+			.contents.active {
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div id="tab">
+				<span class="triggers active">Home</span>
+				<span class="triggers">Profile</span>
+				<span class="triggers">Demo</span>
+			</div>
+			<div id="content">
+				<div class="contents active">离离原上草</div>
+				<div class="contents">一岁一枯荣</div>
+				<div class="contents">野火烧不尽</div>
+			</div>
+		</div>
+		<script>
+			tab({
+			    element: '.wrap',
+			    triggers: '.triggers',
+			    contents: '.contents',
+			    activeIndex:0,
+			    activeTriggerClass:'ui-tab-active',
+			});
+			function tab(obj){
+				var parent=document.querySelector(obj.element);
+				var triggers=document.querySelectorAll(obj.triggers);
+				var contents=document.querySelectorAll(obj.contents);
+				var activeIndex=obj.activeIndex||0;
+				var activeTriggerClass=obj.activeTriggerClass||'';
+				for(var i=0;i<triggers.length;i++){
+					triggers[i].addEventListener('click',
+					(function(index){
+						return function(e){
+							for(var j=0;j<triggers.length;j++){
+								triggers[j].className='triggers';
+							}
+							this.className=activeTriggerClass;
+							for(var j=0;j<contents.length;j++){
+								contents[j].className='contents';
+							}
+							contents[index].className='contents active';
+						};
+					})(i));
+				}
+				for(var i=0;i<triggers.length;i++){
+					triggers[i].className='triggers';
+					contents[i].className='contents';
+				}
+				triggers[activeIndex].className=activeTriggerClass;
+				contents[activeIndex].className='contents active';
+			}
+		</script>
+	</body>
+
+</html>

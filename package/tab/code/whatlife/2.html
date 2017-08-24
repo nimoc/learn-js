@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tab2 参数实现</title>
+    <style>
+    .tab-wrapper {
+        overflow: hidden;
+        clear: both;
+        font-size: 14px;
+    }
+
+    .contents {
+        display: none;
+        top: -1px;
+        position: relative;
+        background: #fff;
+        border-top: 1px solid #ddd;
+        padding: 1em;
+    }
+
+    .triggers {
+        padding: 3px 14px;
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        border: 1px solid transparent;
+    }
+
+    .triggers.active {
+        color: red;
+        display: inline-block;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-bottom: 1px solid transparent;
+    }
+
+    .contents.active {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+<h1>TAB 选项卡 第二阶段</h1>
+    <div class="tab-wrapper">
+        <div class="newtab">
+            <span class="triggers active">1</span>
+            <span class="triggers">2</span>
+            <span class="triggers">3</span>
+            <div class="contents">a</div>
+            <div class="contents">b</div>
+            <div class="contents">c</div>
+        </div>
+        <div class="tab2">
+            <span class="triggers">1</span>
+            <span class="triggers active">2</span>
+            <span class="triggers">3</span>
+            <div class="contents">a</div>
+            <div class="contents">b</div>
+            <div class="contents">c</div>
+        </div>
+    </div>
+</body>
+<script src="../../../../static/jquery/1.11.2/jquery.js"></script>
+<script>
+$(function() {
+
+    tab({
+        element: '.newtab',
+        triggers: '.triggers',
+        contents: '.contents'
+    });
+    tab({
+        element: '.tab2',
+        triggers: '.triggers',
+        contents: '.contents'
+    })
+});
+
+var tab = function(options) {
+    var $wrapper = $(options.element);
+    var $triggers = $wrapper.find(options.triggers);
+    var $contents = $wrapper.find(options.contents);
+    $triggers.each(function() {
+        // 内容区域初始化显示
+        if($(this).hasClass('active')) {
+            var conIndex = $(this).index();
+            $contents.eq(conIndex).addClass('active');
+        }
+
+        // click 触发
+        $(this).on('click', function() {
+            $(this).addClass('active').siblings().removeClass('active');
+            $contents.eq($(this).index()).addClass('active');
+        });
+    });
+}
+</script>
+
+</html>

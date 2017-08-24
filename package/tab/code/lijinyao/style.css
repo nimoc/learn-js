@@ -1,0 +1,30 @@
+.tab{
+    margin: 0;
+    padding: 0;
+    border: 1px solid #c0c0c0;
+}
+.tab-nav{
+    border-bottom: 1px solid #c0c0c0;
+    height: 40px;
+}
+.tab-nav span{
+    display: inline-block;
+    border-right: 1px solid #c0c0c0;
+    height: 40px;
+    width: 100px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+.cont{
+    height: 300px;
+    display: none;
+}
+.tab-nav span.active{
+    background: #ffffff;
+    height: 41px;
+}
+.contents div.active{
+    display: block;
+}
